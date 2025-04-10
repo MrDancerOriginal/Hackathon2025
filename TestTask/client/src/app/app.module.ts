@@ -13,6 +13,7 @@ import { AnimalCardComponent } from './components/animal-card/animal-card.compon
 import { SharedModule } from './shared/shared.module';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AnimalPageComponent } from './pages/animal-page/animal-page.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AddAnimalComponent,
     AnimalListComponent,
     TextInputComponent,
-    AnimalCardComponent
+    AnimalCardComponent,
+    AnimalPageComponent
   ],
   imports: [
     BrowserModule,
