@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl } from
 import { Router } from '@angular/router';
 import { FileUploader } from 'ng2-file-upload';
 import { AnimalsService } from '../../services/animals.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-animal',
@@ -24,10 +25,12 @@ export class AddAnimalComponent {
   constructor(
     private animalService : AnimalsService,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private toastr : ToastrService
     ) { }
 
   ngOnInit(): void {
+    this.toastr.success("Nice", "Good");
     this.initForm();
   }
 

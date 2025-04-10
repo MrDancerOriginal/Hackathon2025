@@ -5,11 +5,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AddAnimalComponent } from './pages/add-animal/add-animal.component';
 import { AnimalListComponent } from './pages/animal-list/animal-list.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TextInputComponent } from './components/text-input/text-input.component';
 import { FileUploadModule } from 'ng2-file-upload';
 import { AnimalCardComponent } from './components/animal-card/animal-card.component';
+import { SharedModule } from './shared/shared.module';
+import { ErrorInterceptor } from './interceptors/error.interceptor';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -25,9 +28,13 @@ import { AnimalCardComponent } from './components/animal-card/animal-card.compon
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    FileUploadModule
+    FileUploadModule,
+    BrowserAnimationsModule,
+    SharedModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
