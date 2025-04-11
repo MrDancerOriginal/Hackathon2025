@@ -12,7 +12,8 @@ namespace ShelterService.Data
         }
         public DbSet<Animal> Animals { get; set; }
         public DbSet<Shelter> Shelters { get; set; }
-        
+        public DbSet<AnimalImage> AnimalImages { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
