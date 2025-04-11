@@ -14,7 +14,9 @@ import { AddShelterComponent } from './pages/shelters/add-shelter/add-shelter.co
 import { ShelterListComponent } from './pages/shelters/shelter-list/shelter-list.component';
 import { ShelterPageComponent } from './pages/shelters/shelter-page/shelter-page.component';
 import { shelterDetailedResolver } from './resolvers/shelter-detailed.resolver';
+import { AuthComponent } from './pages/profile/auth/auth.component';
 const routes: Routes = [
+  { path: 'login/callback', component: AuthComponent },
   {
     path: '',
     runGuardsAndResolvers: 'always',

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { OAuthModule } from 'angular-oauth2-oidc';
 
 
 
@@ -15,7 +16,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     NgxSpinnerModule.forRoot({
       type:'line-scale-party'
     }),
+    OAuthModule.forRoot()
   ],
-  exports: [ToastrModule, NgxSpinnerModule]
+  exports: [ToastrModule, NgxSpinnerModule, OAuthModule]
 })
 export class SharedModule { }
