@@ -14,6 +14,8 @@ import { SharedModule } from './shared/shared.module';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AnimalPageComponent } from './pages/animal-page/animal-page.component';
+import { NotFoundComponent } from './pages/errors/not-found/not-found.component';
+import { ServerErrorComponent } from './pages/errors/server-error/server-error.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { AnimalPageComponent } from './pages/animal-page/animal-page.component';
     AnimalListComponent,
     TextInputComponent,
     AnimalCardComponent,
-    AnimalPageComponent
+    AnimalPageComponent,
+    NotFoundComponent,
+    ServerErrorComponent
   ],
   imports: [
     BrowserModule,

@@ -14,11 +14,11 @@ export class AnimalsService {
   constructor(private http: HttpClient) { }
 
   addAnimal(model: any) {
-    return this.http.post<Animal>(this.baseUrl + '', model);
+    return this.http.post<Animal>(this.baseUrl + 'animals', model);
   }
 
   getAnimals(){
-    return this.http.get<Animal[]>(this.baseUrl + '');
+    return this.http.get<Animal[]>(this.baseUrl + 'animals');
   }
 
   getAnimal(animalName: string) {
@@ -28,6 +28,6 @@ export class AnimalsService {
 
     if (animal) return of(animal);
 
-    return this.http.get<Animal>(this.baseUrl + 'animals/' + animal)
+    return this.http.get<Animal>(this.baseUrl + 'animals/' + animalName);
   }
 }

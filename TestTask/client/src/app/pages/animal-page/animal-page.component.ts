@@ -9,7 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class AnimalPageComponent implements OnInit {
 
-  animal: Animal = {} as Animal;
+  animal: any = {} as any;
 
   constructor(
     private route: ActivatedRoute,) {
@@ -18,7 +18,9 @@ export class AnimalPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.data.subscribe({
-      next: data => this.animal = data['animal']
+      next: data => {
+        this.animal = data['member']
+      }
     });
   }
 }
