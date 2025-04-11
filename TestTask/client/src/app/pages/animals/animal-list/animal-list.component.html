@@ -1,9 +1,13 @@
 <div class="filter-section">
+  <input type="text" placeholder="Ім'я" [(ngModel)]="filter.name" (ngModelChange)="applyFilter()" />
   <input type="text" placeholder="Вид тварини" [(ngModel)]="filter.species" (ngModelChange)="applyFilter()" />
-  <input type="text" placeholder="Вік" [(ngModel)]="filter.age" (ngModelChange)="applyFilter()" />
+
+  <input type="number" placeholder="Мінімальний вік" [(ngModel)]="filter.minAge" (ngModelChange)="applyFilter()" />
+  <input type="number" placeholder="Максимальний вік" [(ngModel)]="filter.maxAge" (ngModelChange)="applyFilter()" />
+
   <input type="text" placeholder="Стан здоров’я" [(ngModel)]="filter.health" (ngModelChange)="applyFilter()" />
 </div>
 
-<div class="col-2" *ngFor="let animal of animals">
+<div class="col-2" *ngFor="let animal of filteredAnimals">
   <app-animal-card [animal]="animal"></app-animal-card>
 </div>

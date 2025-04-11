@@ -21,6 +21,10 @@ export class AnimalsService {
     return this.http.get<Animal[]>(this.baseUrl + 'animals');
   }
 
+  addLike(animalId, userId){
+    return this.http.post(this.baseUrl + 'animals/' + animalId, {});
+  }
+
   getAnimal(animalName: string) {
     const animal = [...this.animalCache.values()]
     .reduce((arr, elem) => arr.concat(elem.result), [])

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Animal } from '../../../models/animal.interface';
 import { ActivatedRoute } from '@angular/router';
+import { AnimalsService } from '../../../services/animals.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-animal-page',
@@ -12,6 +14,8 @@ export class AnimalPageComponent implements OnInit {
   animal: any = {} as any;
 
   constructor(
+    private animalService: AnimalsService,
+    private toastr: ToastrService,
     private route: ActivatedRoute,) {
 
     }
@@ -21,6 +25,12 @@ export class AnimalPageComponent implements OnInit {
       next: data => {
         this.animal = data['member']
       }
+    });
+  }
+
+  addLike(animal : Animal){
+    this.animalService.addLike(animal.id, 1).subscribe({
+      next: () => this.toastr.success('Ви відгукнулись на ' + animal.name)
     });
   }
 }

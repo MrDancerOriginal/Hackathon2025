@@ -13,8 +13,10 @@ export class AnimalListComponent {
   filteredAnimals: Animal[] = [];
 
   filter = {
+    name: '',
     species: '',
-    age: '',
+    minAge: '',
+    maxAge: '',
     health: ''
   };
 
@@ -41,8 +43,10 @@ export class AnimalListComponent {
   applyFilter() {
     this.filteredAnimals = this.animals.filter(animal =>
       (!this.filter.species || animal.species?.toLowerCase().includes(this.filter.species.toLowerCase())) &&
-      (!this.filter.age || animal.age?.toLowerCase().includes(this.filter.age.toLowerCase())) &&
-      (!this.filter.health || animal.health?.toLowerCase().includes(this.filter.health.toLowerCase()))
+      (!this.filter.health || animal.health?.toLowerCase().includes(this.filter.health.toLowerCase())) &&
+      (!this.filter.name || animal.name?.toLowerCase().includes(this.filter.name.toLowerCase())) &&
+      (!this.filter.minAge || animal.age >= +this.filter.minAge) &&
+      (!this.filter.maxAge || animal.age <= +this.filter.maxAge)
     );
   }
 }
