@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Animal } from '../../models/animal.interface';
+import { Animal } from '../../../models/animal.interface';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({

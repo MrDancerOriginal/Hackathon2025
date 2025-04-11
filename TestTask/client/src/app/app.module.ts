@@ -3,8 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AddAnimalComponent } from './pages/add-animal/add-animal.component';
-import { AnimalListComponent } from './pages/animal-list/animal-list.component';
+
+
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TextInputComponent } from './components/text-input/text-input.component';
@@ -13,9 +13,16 @@ import { AnimalCardComponent } from './components/animal-card/animal-card.compon
 import { SharedModule } from './shared/shared.module';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AnimalPageComponent } from './pages/animal-page/animal-page.component';
+import { AnimalPageComponent } from './pages/animals/animal-page/animal-page.component';
 import { NotFoundComponent } from './pages/errors/not-found/not-found.component';
 import { ServerErrorComponent } from './pages/errors/server-error/server-error.component';
+import { RegisterComponent } from './pages/profile/register/register.component';
+import { AuthComponent } from './pages/profile/auth/auth.component';
+import { AnimalListComponent } from './pages/animals/animal-list/animal-list.component';
+import { AddAnimalComponent } from './pages/animals/add-animal/add-animal.component';
+import { ShelterListComponent } from './pages/shelters/shelter-list/shelter-list.component';
+import { ShelterPageComponent } from './pages/shelters/shelter-page/shelter-page.component';
+import { AddShelterComponent } from './pages/shelters/add-shelter/add-shelter.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +33,12 @@ import { ServerErrorComponent } from './pages/errors/server-error/server-error.c
     AnimalCardComponent,
     AnimalPageComponent,
     NotFoundComponent,
-    ServerErrorComponent
+    ServerErrorComponent,
+    RegisterComponent,
+    AuthComponent,
+    ShelterListComponent,
+    ShelterPageComponent,
+    AddShelterComponent,
   ],
   imports: [
     BrowserModule,

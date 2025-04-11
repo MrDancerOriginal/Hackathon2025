@@ -1,12 +1,19 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { authSheltersGuard } from './guards/auth-shelters.guard';
-import { AddAnimalComponent } from './pages/add-animal/add-animal.component';
-import { AnimalListComponent } from './pages/animal-list/animal-list.component';
-import { AnimalPageComponent } from './pages/animal-page/animal-page.component';
+
+
+import { AnimalPageComponent } from './pages/animals/animal-page/animal-page.component';
 import { animalDetailedResolver } from './resolvers/animal-detailed.resolver';
 import { NotFoundComponent } from './pages/errors/not-found/not-found.component';
 import { ServerErrorComponent } from './pages/errors/server-error/server-error.component';
+import { AnimalListComponent } from './pages/animals/animal-list/animal-list.component';
+import { AddAnimalComponent } from './pages/animals/add-animal/add-animal.component';
+import { authVolunteerGuard } from './guards/auth-volunteer.guard';
+import { AddShelterComponent } from './pages/shelters/add-shelter/add-shelter.component';
+import { ShelterListComponent } from './pages/shelters/shelter-list/shelter-list.component';
+import { ShelterPageComponent } from './pages/shelters/shelter-page/shelter-page.component';
+import { shelterDetailedResolver } from './resolvers/shelter-detailed.resolver';
 const routes: Routes = [
   {
     path: '',
@@ -16,6 +23,16 @@ const routes: Routes = [
       { path: 'add-animal', component: AddAnimalComponent },
       { path: 'animals', component: AnimalListComponent},
       { path: 'animals/:animal', component: AnimalPageComponent, resolve: { member: animalDetailedResolver } },
+    ]
+  },
+  {
+    path: '',
+    runGuardsAndResolvers: 'always',
+    canActivate: [authVolunteerGuard],
+    children: [
+      { path: 'add-shelter', component: AddShelterComponent },
+      { path: 'shelters', component: ShelterListComponent},
+      { path: 'shelters/:shelter', component: ShelterPageComponent, resolve: { member: shelterDetailedResolver } },
     ]
   },
   { path: 'not-found', component: NotFoundComponent },

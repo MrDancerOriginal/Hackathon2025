@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { Animal } from '../../models/animal.interface';
-import { AnimalsService } from '../../services/animals.service';
+import { Animal } from '../../../models/animal.interface';
+import { AnimalsService } from '../../../services/animals.service';
+
 
 @Component({
   selector: 'app-animal-list',

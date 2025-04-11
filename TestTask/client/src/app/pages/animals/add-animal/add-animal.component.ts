@@ -2,8 +2,9 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FileUploader } from 'ng2-file-upload';
-import { AnimalsService } from '../../services/animals.service';
+
 import { ToastrService } from 'ngx-toastr';
+import { AnimalsService } from '../../../services/animals.service';
 
 @Component({
   selector: 'app-add-animal',
