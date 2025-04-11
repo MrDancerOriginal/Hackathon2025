@@ -15,6 +15,6 @@
         /// <summary>
         /// Запити від волонтерів надіслані до притулку щоб віддати або забрати тваринку.
         /// </summary>
-        public virtual ICollection<Request> Requests { get; set; } = new List<Request>();
+        //public virtual ICollection<Request> Requests { get; set; } = new List<Request>();
     }
 }
