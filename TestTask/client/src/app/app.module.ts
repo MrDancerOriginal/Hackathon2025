@@ -23,6 +23,8 @@ import { AddAnimalComponent } from './pages/animals/add-animal/add-animal.compon
 import { ShelterListComponent } from './pages/shelters/shelter-list/shelter-list.component';
 import { ShelterPageComponent } from './pages/shelters/shelter-page/shelter-page.component';
 import { AddShelterComponent } from './pages/shelters/add-shelter/add-shelter.component';
+import { ShelterCardComponent } from './components/shelter-card/shelter-card.component';
+import { LoadingInterceptor } from './interceptors/loading.interceptor';
 
 @NgModule({
   declarations: [
@@ -39,6 +41,7 @@ import { AddShelterComponent } from './pages/shelters/add-shelter/add-shelter.co
     ShelterListComponent,
     ShelterPageComponent,
     AddShelterComponent,
+    ShelterCardComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,6 +55,7 @@ import { AddShelterComponent } from './pages/shelters/add-shelter/add-shelter.co
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
 })

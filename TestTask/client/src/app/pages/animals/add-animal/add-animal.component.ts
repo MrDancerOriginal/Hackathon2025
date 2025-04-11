@@ -37,10 +37,10 @@ export class AddAnimalComponent {
 
   initForm() {
     this.registerForm = this.fb.group({
-      name: ['', Validators.required, Validators.minLength(1), Validators.maxLength(24)],
+      name: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(24)]],
       description: [''],
-      species : ['', Validators.required, Validators.minLength(1), Validators.maxLength(24)],
-      age: ['', Validators.required],
+      species : ['', [Validators.required, Validators.minLength(1), Validators.maxLength(24)]],
+      age: ['', [Validators.required]],
       health: ['', [Validators.required]],
     });
 
@@ -54,14 +54,20 @@ export class AddAnimalComponent {
 
   register() {
 
-    const values = { ...this.registerForm.value};
+    const shelterId = 1;
+
+    const values = { shelterId, ...this.registerForm.value};
 
     this.animalService.addAnimal(values).subscribe({
       next: () => {
         this.router.navigateByUrl('/animals');
       },
       error: error => {
-        this.validationErrors = error
+        if (error && error.error && Array.isArray(error.error)) {
+          this.validationErrors = error.error; // якщо помилка містить масив
+        } else {
+          this.validationErrors = [error.message || 'Щось пішло не так']; // якщо це не масив, перетворюємо на масив
+        }
       }
     });
   }

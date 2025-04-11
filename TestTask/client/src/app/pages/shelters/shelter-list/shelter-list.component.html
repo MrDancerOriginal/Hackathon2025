@@ -1,1 +1,3 @@
-<p>shelter-list works!</p>
+<div class="col-2" *ngFor="let shelter of shelters">
+  <app-shelter-card [shelter]="shelter"></app-shelter-card>
+</div>

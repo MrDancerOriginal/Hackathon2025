@@ -1,22 +1,25 @@
 <div class="mb-3">
-  <input type={{type}}
-         class="form-control"
-         [class.is-invalid]="control.touched && control.invalid"
-         [formControl]="control"
-         placeholder={{label}} />
+  <input
+    [type]="type"
+    class="form-control"
+    [class.is-invalid]="control.touched && control.invalid"
+    [formControl]="control"
+    [placeholder]="label"
+  />
 
-         <div class="invalid-feedback" *ngIf="control.errors?.['required']">
-          Введіть {{label}}
-        </div>
-        <div class="invalid-feedback" *ngIf="control.errors?.['minlength']">
-          {{label}} має містити щонайменше {{control.errors?.['minlength'].requiredLength}} символів
-        </div>
-        <div class="invalid-feedback" *ngIf="control.errors?.['maxlength']">
-          {{label}} має містити не більше ніж {{control.errors?.['maxlength'].requiredLength}} символів
-        </div>
+  <div class="invalid-feedback" *ngIf="control.errors?.['required']">
+    Введіть {{ label }}
+  </div>
+  <div class="invalid-feedback" *ngIf="control.errors?.['minlength']">
+    {{ label }} має містити щонайменше
+    {{control.errors?.['minlength'].requiredLength}} символів
+  </div>
+  <div class="invalid-feedback" *ngIf="control.errors?.['maxlength']">
+    {{ label }} має містити не більше ніж
+    {{control.errors?.['maxlength'].requiredLength}} символів
+  </div>
 
-        <div class="invalid-feedback" *ngIf="control.errors?.['notMatching']">
-          Паролі не співпадають
-        </div>
-
+  <div class="invalid-feedback" *ngIf="control.errors?.['notMatching']">
+    Паролі не співпадають
+  </div>
 </div>
