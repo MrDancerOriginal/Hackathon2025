@@ -9,6 +9,7 @@
         public string? Species { get; set; }
         public string? Age { get; set; }
         public string? Health { get; set; }
-        public string? PhotoUrl { get; set; }
+        public virtual ICollection<AnimalImage> Images { get; set; } = new List<AnimalImage>();
+
     }
 }
