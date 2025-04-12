@@ -27,6 +27,8 @@ import { LoadingInterceptor } from './interceptors/loading.interceptor';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/profile/login/login.component';
 import { ProfileComponent } from './pages/profile/profile/profile.component';
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +48,8 @@ import { ProfileComponent } from './pages/profile/profile/profile.component';
     HomeComponent,
     LoginComponent,
     ProfileComponent,
+    HeaderComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
