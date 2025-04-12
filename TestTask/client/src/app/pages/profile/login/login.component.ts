@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserLoginRequestDto } from '../../../models/user-login-request';
 import { AuthService } from '../../../services/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,8 @@ export class LoginComponent {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -34,12 +36,19 @@ export class LoginComponent {
         next: (response) => {
           if (response.result && response.token && response.id) {
             this.authService.storeToken(response.token, response.id);
+            this.toastr.success("Успішна авторизація");
             this.router.navigate(['/']); // Redirect to home or dashboard
           } else if (response.errors) {
+
+            let message;
+            message += response.errors.map(error => error);
+
+            this.toastr.error(message);
             this.errorMessages = response.errors;
           }
         },
         error: (err) => {
+          this.toastr.error(err);
           this.errorMessages = err.error?.errors || ['An error occurred during login'];
         }
       });
