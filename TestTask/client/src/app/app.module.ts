@@ -17,7 +17,6 @@ import { AnimalPageComponent } from './pages/animals/animal-page/animal-page.com
 import { NotFoundComponent } from './pages/errors/not-found/not-found.component';
 import { ServerErrorComponent } from './pages/errors/server-error/server-error.component';
 import { RegisterComponent } from './pages/profile/register/register.component';
-import { AuthComponent } from './pages/profile/auth/auth.component';
 import { AnimalListComponent } from './pages/animals/animal-list/animal-list.component';
 import { AddAnimalComponent } from './pages/animals/add-animal/add-animal.component';
 import { ShelterListComponent } from './pages/shelters/shelter-list/shelter-list.component';
@@ -25,6 +24,9 @@ import { ShelterPageComponent } from './pages/shelters/shelter-page/shelter-page
 import { AddShelterComponent } from './pages/shelters/add-shelter/add-shelter.component';
 import { ShelterCardComponent } from './components/shelter-card/shelter-card.component';
 import { LoadingInterceptor } from './interceptors/loading.interceptor';
+import { HomeComponent } from './pages/home/home.component';
+import { LoginComponent } from './pages/profile/login/login.component';
+import { ProfileComponent } from './pages/profile/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -37,11 +39,13 @@ import { LoadingInterceptor } from './interceptors/loading.interceptor';
     NotFoundComponent,
     ServerErrorComponent,
     RegisterComponent,
-    AuthComponent,
     ShelterListComponent,
     ShelterPageComponent,
     AddShelterComponent,
     ShelterCardComponent,
+    HomeComponent,
+    LoginComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,

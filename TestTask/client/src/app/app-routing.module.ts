@@ -14,9 +14,15 @@ import { AddShelterComponent } from './pages/shelters/add-shelter/add-shelter.co
 import { ShelterListComponent } from './pages/shelters/shelter-list/shelter-list.component';
 import { ShelterPageComponent } from './pages/shelters/shelter-page/shelter-page.component';
 import { shelterDetailedResolver } from './resolvers/shelter-detailed.resolver';
-import { AuthComponent } from './pages/profile/auth/auth.component';
+import { HomeComponent } from './pages/home/home.component';
+import { RegisterComponent } from './pages/profile/register/register.component';
+import { LoginComponent } from './pages/profile/login/login.component';
+import { ProfileComponent } from './pages/profile/profile/profile.component';
+import { authGuard } from './guards/auth.guard';
 const routes: Routes = [
-  { path: 'login/callback', component: AuthComponent },
+  { path: 'profile', component : ProfileComponent, canActivate: [authGuard]},
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
   {
     path: '',
     runGuardsAndResolvers: 'always',

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Animal } from '../../../models/animal.interface';
 import { AnimalsService } from '../../../services/animals.service';
 
@@ -9,6 +9,7 @@ import { AnimalsService } from '../../../services/animals.service';
   styleUrl: './animal-list.component.scss'
 })
 export class AnimalListComponent {
+  @Input() inputAnimals : Animal[] = [];
   animals: Animal[] = [];
   filteredAnimals: Animal[] = [];
 
@@ -26,7 +27,15 @@ export class AnimalListComponent {
   }
 
   ngOnInit(): void {
-    this.loadMembers();
+
+    if(this.inputAnimals.length === 0){
+      this.loadMembers();
+    }else{
+
+      this.animals = this.inputAnimals;
+      this.filteredAnimals = this.inputAnimals;
+    }
+
   }
 
   loadMembers() {

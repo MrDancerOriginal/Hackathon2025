@@ -1,1 +1,36 @@
-{{shelter.name}}
+<div class="shelter-container">
+  <!-- Shelter Information Section -->
+  <div class="shelter-header">
+    <h1 class="shelter-name">{{ shelter.name }}</h1>
+
+    <div class="shelter-details">
+      <div class="detail-item">
+        <i class="fas fa-map-marker-alt"></i>
+        <span>{{ shelter.address }}</span>
+      </div>
+
+      <div class="detail-item">
+        <i class="fas fa-phone"></i>
+        <span>{{ shelter.phone }}</span>
+      </div>
+
+      <div class="detail-item">
+        <i class="fas fa-paw"></i>
+        <span>{{ getCategoryName(shelter.category) }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Announcements Section -->
+  <div class="announcements-section">
+    <h2 class="section-title">Наші підопічні</h2>
+
+    <div *ngIf="shelter.announcements.length === 0" class="no-pets">
+      <p>Наразі немає тварин, які потребують дому</p>
+    </div>
+
+    <div class="announcements-grid">
+      <app-animal-list [inputAnimals]="shelter.announcements"></app-animal-list>
+    </div>
+  </div>
+</div>
