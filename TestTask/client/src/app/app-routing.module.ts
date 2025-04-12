@@ -17,7 +17,10 @@ import { shelterDetailedResolver } from './resolvers/shelter-detailed.resolver';
 import { HomeComponent } from './pages/home/home.component';
 import { RegisterComponent } from './pages/profile/register/register.component';
 import { LoginComponent } from './pages/profile/login/login.component';
+import { ProfileComponent } from './pages/profile/profile/profile.component';
+import { authGuard } from './guards/auth.guard';
 const routes: Routes = [
+  { path: 'profile', component : ProfileComponent, canActivate: [authGuard]},
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   {

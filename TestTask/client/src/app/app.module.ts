@@ -26,6 +26,7 @@ import { ShelterCardComponent } from './components/shelter-card/shelter-card.com
 import { LoadingInterceptor } from './interceptors/loading.interceptor';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/profile/login/login.component';
+import { ProfileComponent } from './pages/profile/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { LoginComponent } from './pages/profile/login/login.component';
     ShelterCardComponent,
     HomeComponent,
     LoginComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
