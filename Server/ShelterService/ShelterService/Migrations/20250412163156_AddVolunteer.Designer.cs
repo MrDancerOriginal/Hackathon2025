@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ShelterService.Data;
 
@@ -11,9 +12,11 @@ using ShelterService.Data;
 namespace ShelterService.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250412163156_AddVolunteer")]
+    partial class AddVolunteer
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -294,14 +297,14 @@ namespace ShelterService.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("VolunteerId")
-                        .HasColumnType("int");
+                    b.Property<string>("VolunteerUserId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("FavoriteId");
 
                     b.HasIndex("AnnouncementId");
 
-                    b.HasIndex("VolunteerId");
+                    b.HasIndex("VolunteerUserId");
 
                     b.ToTable("Favorites");
                 });
@@ -334,8 +337,8 @@ namespace ShelterService.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("VolunteerId")
-                        .HasColumnType("int");
+                    b.Property<string>("VolunteerUserId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("RequestId");
 
@@ -343,7 +346,7 @@ namespace ShelterService.Migrations
 
                     b.HasIndex("ShelterId");
 
-                    b.HasIndex("VolunteerId");
+                    b.HasIndex("VolunteerUserId");
 
                     b.ToTable("Requests");
                 });
@@ -379,11 +382,8 @@ namespace ShelterService.Migrations
 
             modelBuilder.Entity("ShelterService.Models.Entities.Volunteer", b =>
                 {
-                    b.Property<int>("VolunteerId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("VolunteerId"));
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Interests")
                         .HasColumnType("nvarchar(max)");
@@ -398,11 +398,7 @@ namespace ShelterService.Migrations
                     b.Property<string>("Phone")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("VolunteerId");
+                    b.HasKey("UserId");
 
                     b.ToTable("Volunteers");
                 });
@@ -486,7 +482,7 @@ namespace ShelterService.Migrations
 
                     b.HasOne("ShelterService.Models.Entities.Volunteer", null)
                         .WithMany("Favorites")
-                        .HasForeignKey("VolunteerId");
+                        .HasForeignKey("VolunteerUserId");
 
                     b.Navigation("Announcement");
                 });
@@ -505,7 +501,7 @@ namespace ShelterService.Migrations
 
                     b.HasOne("ShelterService.Models.Entities.Volunteer", null)
                         .WithMany("Requests")
-                        .HasForeignKey("VolunteerId");
+                        .HasForeignKey("VolunteerUserId");
 
                     b.Navigation("Announcement");
 
