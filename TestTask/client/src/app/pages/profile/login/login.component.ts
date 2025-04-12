@@ -1,17 +1,16 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserRegistrationRequestDto } from '../../../models/user-registration-request';
+import { UserLoginRequestDto } from '../../../models/user-login-request';
 import { AuthService } from '../../../services/auth.service';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrl: './register.component.scss'
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrl: './login.component.scss'
 })
-export class RegisterComponent {
-  registerForm: FormGroup;
-  roles = ['Shelter', 'Volunteer'];
+export class LoginComponent {
+  loginForm: FormGroup;
   errorMessages: string[] = [];
 
   constructor(
@@ -19,31 +18,29 @@ export class RegisterComponent {
     private authService: AuthService,
     private router: Router
   ) {
-    this.registerForm = this.fb.group({
-      name: ['', Validators.required],
+    this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      role: ['', Validators.required]
+      password: ['', Validators.required]
     });
   }
 
   onSubmit(): void {
     this.errorMessages = [];
 
-    if (this.registerForm.valid) {
-      const userData: UserRegistrationRequestDto = this.registerForm.value;
+    if (this.loginForm.valid) {
+      const loginData: UserLoginRequestDto = this.loginForm.value;
 
-      this.authService.register(userData).subscribe({
+      this.authService.login(loginData).subscribe({
         next: (response) => {
           if (response.result && response.token && response.id) {
             this.authService.storeToken(response.token, response.id);
-            this.router.navigate(['']); // Redirect to home or dashboard
+            this.router.navigate(['/']); // Redirect to home or dashboard
           } else if (response.errors) {
             this.errorMessages = response.errors;
           }
         },
         error: (err) => {
-          this.errorMessages = err.error?.errors || ['An error occurred during registration'];
+          this.errorMessages = err.error?.errors || ['An error occurred during login'];
         }
       });
     }

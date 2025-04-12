@@ -14,10 +14,12 @@ import { AddShelterComponent } from './pages/shelters/add-shelter/add-shelter.co
 import { ShelterListComponent } from './pages/shelters/shelter-list/shelter-list.component';
 import { ShelterPageComponent } from './pages/shelters/shelter-page/shelter-page.component';
 import { shelterDetailedResolver } from './resolvers/shelter-detailed.resolver';
-import { AuthComponent } from './pages/profile/auth/auth.component';
 import { HomeComponent } from './pages/home/home.component';
+import { RegisterComponent } from './pages/profile/register/register.component';
+import { LoginComponent } from './pages/profile/login/login.component';
 const routes: Routes = [
-  { path: 'login/callback', component: AuthComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
   {
     path: '',
     runGuardsAndResolvers: 'always',
@@ -40,7 +42,7 @@ const routes: Routes = [
   },
   { path: 'not-found', component: NotFoundComponent },
   { path: 'server-error', component: ServerErrorComponent },
-  { path: '**', component: HomeComponent, pathMatch: 'full' }
+  { path: '**', component: NotFoundComponent, pathMatch: 'full' }
 ];
 
 @NgModule({

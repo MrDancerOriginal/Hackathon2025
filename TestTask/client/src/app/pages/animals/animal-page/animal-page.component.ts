@@ -24,6 +24,7 @@ export class AnimalPageComponent implements OnInit {
     this.route.data.subscribe({
       next: data => {
         this.animal = data['member']
+        console.log(this.animal)
       }
     });
   }
