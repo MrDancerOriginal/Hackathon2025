@@ -40,6 +40,20 @@ namespace ShelterService.Controllers
             return Ok(shelter);
         }
 
+        // GET: api/shelters/byUserId/<userIdString>
+        [HttpGet("byUserId/{userId}")]
+        public async Task<ActionResult<Shelter>> GetShelterByUserId(string userId)
+        {
+            var shelter = await _context.Shelters
+                .Include(s => s.Announcements)
+                .FirstOrDefaultAsync(s => s.UserId == userId);
+
+            if (shelter == null)
+                return NotFound(new { message = "Shelter not found by userId" });
+
+            return Ok(shelter);
+        }
+
         // POST: api/shelters
         [HttpPost]
         public async Task<ActionResult<Shelter>> AddShelter(Shelter shelter)

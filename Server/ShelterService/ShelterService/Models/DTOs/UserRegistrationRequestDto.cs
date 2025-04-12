@@ -4,8 +4,9 @@ namespace ShelterService.Models.DTOs
 {
     public class UserRegistrationRequestDto
     {
+        // Спільні поля
         [Required]
-        public string Name { get; set; }
+        public string Role { get; set; } // "Shelter" або "Volunteer"
 
         [Required]
         [EmailAddress]
@@ -15,6 +16,17 @@ namespace ShelterService.Models.DTOs
         public string Password { get; set; }
 
         [Required]
-        public string Role { get; set; } // "Shelter" або "Volunteer"
+        public string Location { get; set; }
+
+        [Required]
+        public string Phone { get; set; }
+
+        // Додаткові поля для притулку
+        public string? ShelterName { get; set; }
+        public string? Address { get; set; }
+        public ShelterCategory? Category { get; set; }
+
+        // Додаткові поля для волонтера
+        public string? FullName { get; set; }
     }
 }

@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using ShelterService.Data;
+using ShelterService.Models;
 using ShelterService.Models.DTOs;
+using ShelterService.Models.Entities;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -14,11 +17,13 @@ namespace ShelterService.Controllers
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly IConfiguration _configuration;
+        private readonly AppDbContext _context;
 
-        public AuthController(UserManager<IdentityUser> userManager, IConfiguration configuration)
+        public AuthController(UserManager<IdentityUser> userManager, IConfiguration configuration, AppDbContext context)
         {
             _userManager = userManager;
             _configuration = configuration;
+            _context = context;
         }
 
         [HttpPost]
@@ -44,26 +49,72 @@ namespace ShelterService.Controllers
                 }
 
                 //create a user
-                var new_user = new IdentityUser()
+                var newUser = new IdentityUser()
                 {
                     Email = requestDto.Email,
-                    UserName = requestDto.Email
+                    UserName = requestDto.Email,
+                    PhoneNumber = requestDto.Phone
                 };
 
-                var is_created = await _userManager.CreateAsync(new_user, requestDto.Password);
+                var is_created = await _userManager.CreateAsync(newUser, requestDto.Password);
 
                 if (is_created.Succeeded)
                 {
-                    await _userManager.AddToRoleAsync(new_user, requestDto.Role);
+                    await _userManager.AddToRoleAsync(newUser, requestDto.Role);
 
-                    var token = await GenerateJwtToken(new_user);
+                    if (requestDto.Role == "Volunteer")
+                    {
+
+                        if (string.IsNullOrWhiteSpace(requestDto.FullName))
+                        {
+                            return BadRequest(new AuthResult
+                            {
+                                Result = false,
+                                Errors = new List<string> { "FullName is required for Volunteer role" }
+                            });
+                        }
+
+                        var volunteer = new Volunteer
+                        {
+                            UserId = newUser.Id,
+                            Name = requestDto.FullName,
+                            Phone = requestDto.Phone,
+                            Location = requestDto.Location
+                        };
+                        _context.Volunteers.Add(volunteer);
+                    }
+                    else if (requestDto.Role == "Shelter")
+                    {
+
+                        if (string.IsNullOrWhiteSpace(requestDto.ShelterName))
+                        {
+                            return BadRequest(new AuthResult
+                            {
+                                Result = false,
+                                Errors = new List<string> { "ShelterName is required for Shelter role" }
+                            });
+                        }
+
+                        var shelter = new Shelter
+                        {
+                            UserId = newUser.Id,
+                            Name = requestDto.ShelterName,
+                            Address = requestDto.Address,
+                            Phone = requestDto.Phone,
+                            Category = requestDto.Category ?? ShelterCategory.DogCatShelter
+                        };
+                        _context.Shelters.Add(shelter);
+                    }
+
+                    await _context.SaveChangesAsync();
+
+                    var token = await GenerateJwtToken(newUser);
 
                     return Ok(new AuthResult()
                     {
                         Result = true,
                         Token = token,
-                        Id = new_user.Id
-
+                        Id = newUser.Id
                     });
                 }
 
