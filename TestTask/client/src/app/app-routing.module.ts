@@ -15,6 +15,7 @@ import { ShelterListComponent } from './pages/shelters/shelter-list/shelter-list
 import { ShelterPageComponent } from './pages/shelters/shelter-page/shelter-page.component';
 import { shelterDetailedResolver } from './resolvers/shelter-detailed.resolver';
 import { AuthComponent } from './pages/profile/auth/auth.component';
+import { HomeComponent } from './pages/home/home.component';
 const routes: Routes = [
   { path: 'login/callback', component: AuthComponent },
   {
@@ -39,7 +40,7 @@ const routes: Routes = [
   },
   { path: 'not-found', component: NotFoundComponent },
   { path: 'server-error', component: ServerErrorComponent },
-  { path: '**', component: NotFoundComponent, pathMatch: 'full' }
+  { path: '**', component: HomeComponent, pathMatch: 'full' }
 ];
 
 @NgModule({
