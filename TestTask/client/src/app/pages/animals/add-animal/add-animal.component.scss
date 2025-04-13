@@ -1,0 +1,11 @@
+.disabled-form {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.my-drop-zone {
+  border: dotted 3px lightgray;
+}
+.nv-file-over {
+  border: dotted 3px green;
+}

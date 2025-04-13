@@ -1,73 +1,135 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { FileUploader } from 'ng2-file-upload';
-
+import { FileUploader, FileItem } from 'ng2-file-upload';
 import { ToastrService } from 'ngx-toastr';
 import { AnimalsService } from '../../../services/animals.service';
+import { AuthService } from '../../../services/auth.service';
+import { environment } from '../../../../environment/environment';
 
 @Component({
   selector: 'app-add-animal',
   templateUrl: './add-animal.component.html',
-  styleUrl: './add-animal.component.scss'
+  styleUrls: ['./add-animal.component.scss']
 })
 export class AddAnimalComponent {
-
   @Output() cancelRegister = new EventEmitter();
   registerForm: FormGroup = new FormGroup({});
   validationErrors: string[] | undefined;
+  isUploading = false;
 
-  public uploader: FileUploader = new FileUploader({
-    url: 'YOUR_UPLOAD_URL_HERE', // наприклад, http://localhost:3000/upload
-    isHTML5: true
-  });
+  public uploader: FileUploader;
   public hasBaseDropZoneOver: boolean = false;
 
   constructor(
-    private animalService : AnimalsService,
+    private animalService: AnimalsService,
     private fb: FormBuilder,
     private router: Router,
-    private toastr : ToastrService
-    ) { }
+    private toastr: ToastrService,
+    private authService: AuthService
+  ) {
+
+    this.uploader = new FileUploader({
+      url: `${environment.apiUrl}animals`, // Set the URL here
+      isHTML5: true,
+      allowedFileType: ['image'],
+      autoUpload: false,
+      removeAfterUpload: true,
+      maxFileSize: 10 * 1024 * 1024, // 10MB
+      method: 'POST',
+      disableMultipart: false // Ensure multipart is enabled
+    });
+  }
 
   ngOnInit(): void {
-    this.toastr.success("Nice", "Good");
     this.initForm();
+    this.setupUploader();
   }
 
   initForm() {
     this.registerForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(24)]],
       description: [''],
-      species : ['', [Validators.required, Validators.minLength(1), Validators.maxLength(24)]],
+      species: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(24)]],
       age: ['', [Validators.required]],
       health: ['', [Validators.required]],
     });
-
   }
 
+  setupUploader() {
+    this.uploader.onAfterAddingFile = (file) => {
+      file.withCredentials = false;
+    };
 
+    this.uploader.onWhenAddingFileFailed = (item, filter, options) => {
+      switch (filter.name) {
+        case 'fileSize':
+          this.toastr.error(`File ${item.name} is too large. Max size is 10MB.`);
+          break;
+        case 'fileType':
+          this.toastr.error(`File ${item.name} has invalid type. Only images are allowed.`);
+          break;
+        default:
+          this.toastr.error(`Error adding file ${item.name}`);
+      }
+    };
+  }
 
   public fileOverBase(e: any): void {
     this.hasBaseDropZoneOver = e;
   }
 
   register() {
+    if (this.isUploading || !this.registerForm.valid) return;
 
-    const shelterId = 1;
+    this.isUploading = true;
+    const shelterId = this.authService.getUserId();
+    const formData = new FormData();
 
-    const values = { shelterId, ...this.registerForm.value};
+    // Append all required fields, even if empty
+    formData.append('ShelterId', shelterId.toString());
+    formData.append('Name', this.registerForm.get('name')?.value || '');
+    formData.append('Description', this.registerForm.get('description')?.value || '');
+    formData.append('Species', this.registerForm.get('species')?.value || '');
+    formData.append('Age', this.registerForm.get('age')?.value || '');
+    formData.append('Health', this.registerForm.get('health')?.value || '');
 
-    this.animalService.addAnimal(values).subscribe({
+    // Append photos if any
+    if (this.uploader.queue.length > 0) {
+      this.uploader.queue.forEach((fileItem: FileItem) => {
+        formData.append('Photos', fileItem._file);
+      });
+    } else {
+      formData.append('Photos', new Blob(), ''); // Send empty file if no photos
+    }
+
+    this.animalService.addAnimal(formData).subscribe({
       next: () => {
+        this.toastr.success('Оголошення успішно додано');
         this.router.navigateByUrl('/animals');
       },
-      error: error => {
-        if (error && error.error && Array.isArray(error.error)) {
-          this.validationErrors = error.error; // якщо помилка містить масив
+      error: (error) => {
+        this.isUploading = false;
+        console.error('Error:', error);
+
+        if (error.error) {
+          // Handle different error formats
+          if (typeof error.error === 'string') {
+            this.validationErrors = [error.error];
+          } else if (Array.isArray(error.error)) {
+            this.validationErrors = error.error;
+          } else if (error.error.errors) {
+            // this.validationErrors = Object.values(error.error.errors).flat();
+            console.log(Object.values(error.error.errors).flat());
+          } else {
+            this.validationErrors = ['Сталася невідома помилка'];
+          }
         } else {
-          this.validationErrors = [error.message || 'Щось пішло не так']; // якщо це не масив, перетворюємо на масив
+          this.validationErrors = ['Помилка сервера'];
         }
+      },
+      complete: () => {
+        this.isUploading = false;
       }
     });
   }
