@@ -1,98 +1,89 @@
-<div class="register-container">
-  <h2>Register</h2>
-  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-    <!-- Common fields -->
-    <div class="form-group">
-      <label for="role">Role</label>
-      <select
-        id="role"
-        formControlName="role"
-        class="form-control"
-        (change)="onRoleChange()"
-      >
-        <option value="">Select a role</option>
-        <option *ngFor="let role of roles" [value]="role">{{ role }}</option>
-      </select>
-      <div
-        *ngIf="registerForm.get('role')?.invalid && registerForm.get('role')?.touched"
-        class="error-message"
-      >
-        Role is required
-      </div>
-    </div>
+<section class="mx-auto my-[100px] flex max-w-[1290px] items-center justify-between">
+  <figure class="absolute right-0 top-0 h-auto w-[200px]">
+    <img src="bg/trace/trace-1.png" alt="" />
+  </figure>
 
-    <app-text-input
-      [formControl]="$any(registerForm.controls['email'])"
-      [label]="'Email'"
-      type="email"
-    ></app-text-input>
+  <article class="w-[40%]">
+    <h1 class="teading-none mt-8 text-2xl font-bold text-[#4A2C2A]">
+      Знайди свого найкращого друга
+    </h1>
 
-    <app-text-input
-      [formControl]="$any(registerForm.controls['password'])"
-      [label]="'Password'"
-      type="password"
-    ></app-text-input>
-
-    <app-text-input
-      [formControl]="$any(registerForm.controls['location'])"
-      [label]="'Location'"
-    ></app-text-input>
-
-    <app-text-input
-      [formControl]="$any(registerForm.controls['phone'])"
-      [label]="'Phone Number'"
-      type="tel"
-    ></app-text-input>
-
-    <div *ngIf="registerForm.get('role')?.value === 'Shelter'">
-      <app-text-input
-        [formControl]="$any(registerForm.controls['shelterName'])"
-        [label]="'Shelter Name'"
-        [required]="true"
-      ></app-text-input>
-
-      <app-text-input
-        [formControl]="$any(registerForm.controls['address'])"
-        [label]="'Address'"
-        [required]="true"
-      ></app-text-input>
-
-      <div class="form-group">
-        <label for="category">Shelter Category</label>
-        <select
-          id="category"
-          formControlName="category"
-          class="form-control"
-          required
-        >
-          <option value="">Select category</option>
-          <option *ngFor="let category of shelterCategories" [value]="category">
-            {{ category }}
-          </option>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="mt-6 text-[#4A2C2A] space-y-4">
+      <label class="form-group mt-4 flex flex-col">
+        <span class="indent-4 text-sm font-normal">Ви - ...</span>
+        <select id="role" formControlName="role" class="form-control w-full rounded-2xl border border-[#4A2C2A] bg-[#F6EBEA] px-6 py-3 pr-12" (change)="onRoleChange()">
+          <option value="">Ваша роль</option>
+          <option *ngFor="let role of roles" [value]="role">{{role}}</option>
         </select>
+        <div *ngIf="registerForm.get('role')?.invalid && registerForm.get('role')?.touched" class="text-sm text-red-600">
+          Role is required
+        </div>
+      </label>
+
+      <!-- Додаткові поля для Організації -->
+      <div *ngIf="registerForm.get('role')?.value === 'Організація'" class="block space-y-4">
+        <div class="form-group mt-4 flex flex-col">
+          <span class="indent-4 text-sm font-normal">Категорія закладу</span>
+          <select id="category" formControlName="category" class="form-control w-full rounded-2xl border border-[#4A2C2A] bg-[#F6EBEA] px-6 py-3">
+            <option value="">Оберіть категорію</option>
+            <option *ngFor="let category of shelterCategories" [value]="category">{{category}}</option>
+          </select>
+          <div *ngIf="registerForm.get('category')?.invalid && registerForm.get('category')?.touched" class="text-sm text-red-600">
+            Категорія обов'язкова для притулків
+          </div>
+        </div>
+
+        <app-text-input [formControl]="$any(registerForm.controls['shelterName'])" [label]="'Назва закладу'" class="block"></app-text-input>
+        <app-text-input [formControl]="$any(registerForm.controls['email'])" [label]="'E-mail'"></app-text-input>
+        <app-text-input [formControl]="$any(registerForm.controls['password'])" [label]="'Пароль'" [type]="'password'" [isPassword]="'true'"></app-text-input>
+        <!-- <app-text-input [formControl]="$any(registerForm.controls['location'])" [label]="'Місцезнаходження'"></app-text-input> -->
+        <app-text-input [formControl]="$any(registerForm.controls['address'])" [label]="'Адреса'"></app-text-input>
+        <app-text-input [formControl]="$any(registerForm.controls['phone'])" [label]="'Номер телефону'"></app-text-input>
       </div>
-    </div>
 
-    <div *ngIf="registerForm.get('role')?.value === 'Volunteer'">
-      <app-text-input
-        [formControl]="$any(registerForm.controls['fullName'])"
-        [label]="'Full Name'"
-        [required]="true"
-      ></app-text-input>
-    </div>
+      <!-- Додаткові поля для Волонтера -->
+      <div *ngIf="registerForm.get('role')?.value === 'Волонтер'">
+        <app-text-input [formControl]="$any(registerForm.controls['fullName'])" [label]="'Повне ім\'я'"></app-text-input>
+        <app-text-input [formControl]="$any(registerForm.controls['email'])" [label]="'E-mail'"></app-text-input>
+        <app-text-input [formControl]="$any(registerForm.controls['password'])" [label]="'Пароль'" [type]="'password'" [isPassword]="'true'"></app-text-input>
+        <!-- <p class="mt-1 text-sm text-opacity-50"> Пароль повинен містити 8 символів, цифри, великі та малі літери </p> -->
+        <app-text-input [formControl]="$any(registerForm.controls['phone'])" [label]="'Номер телефону'"></app-text-input>
+        <app-text-input [formControl]="$any(registerForm.controls['location'])" [label]="'Місцезнаходження'"></app-text-input>
+      </div>
 
-    <div *ngIf="errorMessages.length > 0" class="alert alert-danger">
-      <ul>
-        <li *ngFor="let error of errorMessages">{{ error }}</li>
-      </ul>
-    </div>
+      <div *ngIf="errorMessages.length > 0" class="alert alert-danger text-sm mt-4">
+        <ul>
+          <li *ngFor="let error of errorMessages">{{error}}</li>
+        </ul>
+      </div>
 
-    <button
-      type="submit"
-      class="btn btn-primary"
-      [disabled]="registerForm.invalid"
-    >
-      Register
+      <button type="submit" class="mt-6 w-full rounded-2xl bg-[#4A2C2A] py-[10px] text-white transition duration-300 ease-in-out hover:bg-[#3D2523]" [disabled]="registerForm.invalid">
+        Зареєструватись
+      </button>
+    </form>
+
+    <div class="mt-8 h-[1px] w-full bg-[#4A2C2A] bg-opacity-[20%]"></div>
+
+    <button class="mt-8 flex w-full items-center justify-center gap-2 rounded-2xl bg-[#2A1D17] py-[10px] text-white">
+      <figure class="h-5 w-5">
+        <img src="icons/google.png" alt="Google" />
+      </figure>
+      <span>Або зареєструйтесь через Google</span>
     </button>
-  </form>
-</div>
+
+    <div class="mt-6 w-full text-center font-normal text-[#4A2C2A]">
+      <span>
+        Уже зареєстровані?
+        <a class="decoration-1.5 underline decoration-[#4A2C2A] underline-offset-4" href="login">
+          Увійти
+        </a>
+      </span>
+    </div>
+  </article>
+
+  <article class="w-[58%]">
+    <figure>
+      <img src="cat.png" alt="Login" />
+    </figure>
+  </article>
+</section>
