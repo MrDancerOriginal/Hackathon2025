@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ShelterService.Data;
+using ShelterService.Models.DTOs;
 using ShelterService.Models.Entities;
 
 namespace ShelterService.Controllers
@@ -62,6 +63,37 @@ namespace ShelterService.Controllers
             await _context.SaveChangesAsync();
 
             return Ok(); 
+        }
+
+        [HttpGet("{shelterId}/liked-animals")]
+        public async Task<ActionResult<IEnumerable<LikedAnimalDto>>> GetLikedAnimalsForShelter(int shelterId)
+        {
+            // 1. Перевіряємо чи існує притулок
+            var shelter = await _context.Shelters
+                .Include(s => s.Announcements)
+                .FirstOrDefaultAsync(s => s.ShelterId == shelterId);
+
+            if (shelter == null)
+                return NotFound(new { message = "Shelter not found" });
+
+            // 2. Отримуємо всі лайки для тварин цього притулку
+            var animalIds = shelter.Announcements.Select(a => a.Id).ToList();
+
+            var likedAnimals = await _context.Favorites
+                .Where(f => animalIds.Contains(f.AnnouncementId))
+                .Include(f => f.Announcement)
+                .Select(f => new LikedAnimalDto
+                {
+                    AnimalId = f.Announcement.Id,
+                    AnimalName = f.Announcement.Name,
+                    AnimalSpecies = f.Announcement.Species,
+                    AnimalAge = f.Announcement.Age,
+                    VolunteerUserId = f.UserId,
+                    LikedDate = f.AddedDate
+                })
+                .ToListAsync();
+
+            return Ok(likedAnimals);
         }
     }
 }

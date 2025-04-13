@@ -1,1 +1,48 @@
-<p>profile works!</p>
+<div class="account-container" *ngIf="!loading">
+  <div *ngIf="userRole === 'Shelter' && shelterData">
+    <h2>Кабінет притулку</h2>
+    <div class="shelter-info">
+      <h3>{{ shelterData.name }}</h3>
+      <p><strong>Адреса:</strong> {{ shelterData.address }}</p>
+      <p><strong>Телефон:</strong> {{ shelterData.phone }}</p>
+      <p><strong>Категорія:</strong> {{ shelterData.category }}</p>
+
+      <!-- Додаткові елементи для притулку -->
+      <div class="shelter-actions">
+        <button routerLink="/shelter/animals" class="btn btn-primary">Мої тварини</button>
+        <button routerLink="/shelter/requests" class="btn btn-secondary">Запити волонтерів</button>
+        <button routerLink="/shelter/likes" class="btn btn-info">Лайки волонтерів</button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="userRole === 'Volunteer' && volunteerData">
+    <h2>Кабінет волонтера</h2>
+    <div class="volunteer-info">
+      <h3>{{ volunteerData.name }}</h3>
+      <p><strong>Телефон:</strong> {{ volunteerData.phone || 'Не вказано' }}</p>
+      <p><strong>Інтереси:</strong> {{ volunteerData.interests || 'Не вказано' }}</p>
+      <p><strong>Локація:</strong> {{ volunteerData.location || 'Не вказано' }}</p>
+
+      <!-- Додаткові елементи для волонтера -->
+      <div class="volunteer-actions">
+        <button routerLink="/volunteer/favorites" class="btn btn-primary">Улюблені тварини</button>
+        <button routerLink="/volunteer/requests" class="btn btn-secondary">Мої запити</button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="userRole === 'Unknown'">
+    <div class="alert alert-warning">
+      Не вдалося визначити тип облікового запису. Будь ласка, зверніться до підтримки.
+    </div>
+  </div>
+
+  <button (click)="logout()" class="btn btn-danger mt-3">Вийти</button>
+</div>
+
+<div *ngIf="loading" class="loading-spinner">
+  <div class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Завантаження...</span>
+  </div>
+</div>

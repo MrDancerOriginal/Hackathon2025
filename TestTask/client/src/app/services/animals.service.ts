@@ -22,7 +22,10 @@ export class AnimalsService {
   }
 
   addLike(animalId, userId){
-    return this.http.post(this.baseUrl + 'animals/' + animalId, {});
+    return this.http.post<any>(
+      `${this.baseUrl}/${userId}/likes`,
+      animalId
+    );
   }
 
   getAnimal(animalName: string) {

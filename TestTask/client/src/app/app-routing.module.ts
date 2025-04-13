@@ -24,7 +24,6 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'home', component: HomeComponent},
-  { path: 'login/callback', component: AuthComponent },
   {
     path: '',
     runGuardsAndResolvers: 'always',

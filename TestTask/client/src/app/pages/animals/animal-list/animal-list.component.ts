@@ -31,7 +31,6 @@ export class AnimalListComponent {
     if(this.inputAnimals.length === 0){
       this.loadMembers();
     }else{
-
       this.animals = this.inputAnimals;
       this.filteredAnimals = this.inputAnimals;
     }
