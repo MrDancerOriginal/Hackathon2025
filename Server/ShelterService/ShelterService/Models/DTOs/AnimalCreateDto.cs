@@ -2,12 +2,12 @@
 {
     public class AnimalCreateDto
     {
-        public string ShelterId { get; set; }
+        public string UserId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string Species { get; set; }
         public string Age { get; set; }
         public string Health { get; set; }
-        public List<IFormFile> Photos { get; set; }
+        public List<IFormFile>? Photos { get; set; }
     }
 }

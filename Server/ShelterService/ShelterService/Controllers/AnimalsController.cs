@@ -56,15 +56,19 @@ namespace ShelterService.Controllers
         [HttpPost]
         public async Task<ActionResult<Animal>> AddAnimal([FromForm] AnimalCreateDto model)
         {
-            var shelter = await _context.Shelters.FindAsync(model.ShelterId);
-            if (shelter == null)
+            if (string.IsNullOrEmpty(model.UserId))
+                return BadRequest("UserId is required.");
+
+            var shelter = await _context.Shelters.FirstOrDefaultAsync(s => s.UserId == model.UserId);
+            var volunteer = await _context.Volunteers.FirstOrDefaultAsync(v => v.UserId == model.UserId);
+            if (shelter == null && volunteer == null)
             {
-                return BadRequest("Shelter not found.");
+                return BadRequest("User with given UserId was not found as Shelter or Volunteer.");
             }
 
             var animal = new Animal
             {
-                ShelterId = model.ShelterId,
+                UserId = model.UserId,
                 Name = model.Name,
                 Description = model.Description,
                 Species = model.Species,
