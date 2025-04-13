@@ -1,0 +1,9 @@
+<div *ngIf="favoriteAnimals.length === 0">
+  <p>Ви не додавали у збереження поки.</p>
+</div>
+<ul *ngIf="favoriteAnimals.length > 0">
+  <li *ngFor="let animal of favoriteAnimals">
+    {{animal.name}}
+    <button (click)="removeFavorite(animal)">Remove</button>
+  </li>
+</ul>

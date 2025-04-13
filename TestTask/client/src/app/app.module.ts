@@ -29,6 +29,7 @@ import { LoginComponent } from './pages/profile/login/login.component';
 import { ProfileComponent } from './pages/profile/profile/profile.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { FavListComponent } from './components/fav-list/fav-list.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { FooterComponent } from './components/footer/footer.component';
     ProfileComponent,
     HeaderComponent,
     FooterComponent,
+    FavListComponent,
   ],
   imports: [
     BrowserModule,

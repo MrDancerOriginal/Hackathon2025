@@ -37,4 +37,8 @@ export class AnimalPageComponent implements OnInit {
       next: () => this.toastr.success('Ви відгукнулись на ' + animal.name)
     });
   }
+
+  addFav(animal: Animal){
+    this.animalService.addFavorite(animal);
+  }
 }

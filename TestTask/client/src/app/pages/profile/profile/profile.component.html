@@ -25,10 +25,11 @@
       <p><strong>Локація:</strong> {{ volunteerData.location || 'Не вказано' }}</p>
 
       <!-- Додаткові елементи для волонтера -->
-      <div class="volunteer-actions">
-        <button routerLink="/volunteer/favorites" class="btn btn-primary">Улюблені тварини</button>
+      <!-- <div class="volunteer-actions">
         <button routerLink="/volunteer/requests" class="btn btn-secondary">Мої запити</button>
-      </div>
+      </div> -->
+
+      <app-fav-list></app-fav-list>
     </div>
   </div>
 
