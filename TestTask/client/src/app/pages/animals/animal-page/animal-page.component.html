@@ -1,4 +1,77 @@
-{{animal.name}}
+<div class="max-w-6xl mx-auto px-4 py-8">
+  <!-- Header with animal name -->
+  <div class="mb-8 text-center">
+    <h1 class="text-4xl font-bold text-[#4A2C2A] mb-2">{{animal.name || 'Тварина без імені'}}</h1>
+    <div class="w-24 h-1 bg-[#D4A59A] mx-auto"></div>
+  </div>
 
-<button class="btn btn-primary" (click)="addLike(animal)">Відгукнутись</button>
-<button class="btn btn-secondary" (click)="addFav(animal)">В улюблені</button>
+  <!-- Main content grid -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+    <!-- Animal image section -->
+    <div class="rounded-2xl overflow-hidden shadow-lg bg-[#F6EBEA] h-96 flex items-center justify-center">
+      <svg class="w-32 h-32 text-[#D4A59A]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21"></path>
+      </svg>
+    </div>
+
+    <!-- Animal details section -->
+    <div class="bg-white p-6 rounded-2xl shadow-lg border border-[#F6EBEA]">
+      <!-- Details grid -->
+      <div class="grid grid-cols-2 gap-4 mb-8">
+        <div>
+          <h3 class="text-sm font-medium text-gray-500">Вид</h3>
+          <p class="text-lg font-semibold text-[#4A2C2A]">{{animal.species || 'Невідомо'}}</p>
+        </div>
+        <div>
+          <h3 class="text-sm font-medium text-gray-500">Вік</h3>
+          <p class="text-lg font-semibold text-[#4A2C2A]">{{animal.age ? animal.age + ' років' : 'Невідомо'}}</p>
+        </div>
+        <div>
+          <h3 class="text-sm font-medium text-gray-500">Стан здоров'я</h3>
+          <p class="text-lg font-semibold" [ngClass]="{
+            'text-green-600': animal.health === 'healthy',
+            'text-yellow-600': animal.health === 'needs_care',
+            'text-red-600': animal.health === 'urgent'
+          }">
+            {{animal.health === 'healthy' ? 'Здоровий' :
+              animal.health === 'needs_care' ? 'Потребує догляду' :
+              animal.health === 'urgent' ? 'Терміново до лікаря' : 'Невідомо'}}
+          </p>
+        </div>
+        <div>
+          <h3 class="text-sm font-medium text-gray-500">ID</h3>
+          <p class="text-lg font-semibold text-[#4A2C2A]">#{{animal.id}}</p>
+        </div>
+      </div>
+
+      <!-- Description -->
+      <div class="mb-8">
+        <h3 class="text-sm font-medium text-gray-500 mb-2">Опис</h3>
+        <p class="text-[#4A2C2A]">{{animal.description || 'Опис відсутній'}}</p>
+      </div>
+
+      <!-- Action buttons -->
+      <div class="flex flex-wrap gap-4">
+        <button
+          (click)="addLike(animal)"
+          class="flex-1 min-w-[200px] px-6 py-3 bg-[#D4A59A] hover:bg-[#4A2C2A] text-white font-medium rounded-lg transition-all duration-300 flex items-center justify-center gap-2"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+          </svg>
+          Відгукнутись
+        </button>
+
+        <button
+          (click)="addFav(animal)"
+          class="flex-1 min-w-[200px] px-6 py-3 bg-white border border-[#D4A59A] text-[#4A2C2A] hover:bg-[#F6EBEA] font-medium rounded-lg transition-all duration-300 flex items-center justify-center gap-2"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
+          </svg>
+          В улюблені
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

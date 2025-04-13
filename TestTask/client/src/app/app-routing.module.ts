@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { authSheltersGuard } from './guards/auth-shelters.guard';
 
-
 import { AnimalPageComponent } from './pages/animals/animal-page/animal-page.component';
 import { animalDetailedResolver } from './resolvers/animal-detailed.resolver';
 import { NotFoundComponent } from './pages/errors/not-found/not-found.component';
@@ -19,18 +18,20 @@ import { RegisterComponent } from './pages/profile/register/register.component';
 import { LoginComponent } from './pages/profile/login/login.component';
 import { ProfileComponent } from './pages/profile/profile/profile.component';
 import { authGuard } from './guards/auth.guard';
+
 const routes: Routes = [
-  { path: 'profile', component : ProfileComponent, canActivate: [authGuard]},
+  { path: '', pathMatch: 'full', redirectTo: 'home' }, // Додано перенаправлення для порожнього шляху
+  { path: 'profile', component: ProfileComponent, canActivate: [authGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'home', component: HomeComponent},
+  { path: 'home', component: HomeComponent },
   {
     path: '',
     runGuardsAndResolvers: 'always',
     canActivate: [authSheltersGuard],
     children: [
       { path: 'add-animal', component: AddAnimalComponent },
-      { path: 'animals', component: AnimalListComponent},
+      { path: 'animals', component: AnimalListComponent },
       { path: 'animals/:animal', component: AnimalPageComponent, resolve: { member: animalDetailedResolver } },
     ]
   },
@@ -40,7 +41,7 @@ const routes: Routes = [
     canActivate: [authVolunteerGuard],
     children: [
       { path: 'add-shelter', component: AddShelterComponent },
-      { path: 'shelters', component: ShelterListComponent},
+      { path: 'shelters', component: ShelterListComponent },
       { path: 'shelters/:shelter', component: ShelterPageComponent, resolve: { member: shelterDetailedResolver } },
     ]
   },

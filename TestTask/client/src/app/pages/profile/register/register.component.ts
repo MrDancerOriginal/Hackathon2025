@@ -128,7 +128,7 @@ export class RegisterComponent {
               this.shelterService.addShelter(shelterData).subscribe({
                 next: (shelterResponse) => {
                   console.log('Shelter registered successfully', shelterResponse);
-                  this.router.navigate(['']); // Перенаправлення після успішної реєстрації
+                  this.router.navigate(['/profile']); // Перенаправлення після успішної реєстрації
                 },
                 error: (shelterError) => {
                   console.error('Shelter registration failed', shelterError);
@@ -136,7 +136,7 @@ export class RegisterComponent {
                 }
               });
             } else {
-              this.router.navigate(['']); // Перенаправлення для Volunteer
+              this.router.navigate(['/profile']); // Перенаправлення для Volunteer
             }
             this.router.navigate(['']);
           } else if (response.errors) {

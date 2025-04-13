@@ -7,7 +7,7 @@
         <h1 class="text-2xl font-bold">Додати тварину</h1>
         <figure class="h-8 w-8"><img src="icons/paw.png" alt="" /></figure>
       </div>
-      
+
       <div class="mt-8 flex w-full flex-col gap-6">
         <!-- Animal Type Dropdown -->
         <div class="relative w-full">
@@ -33,9 +33,9 @@
         <div class="flex flex-col gap-4 sm:flex-row sm:gap-8">
           <div class="w-full sm:w-[32%]">
             <span class="ml-4 text-sm font-normal">Введіть вік цифрами</span>
-            <app-text-input 
-              [formControl]="$any(registerForm.controls['age'])" 
-              [label]="'Введіть вік цифрами'" 
+            <app-text-input
+              [formControl]="$any(registerForm.controls['age'])"
+              [label]="'Введіть вік цифрами'"
               type="number"
               [iPlaceholder]="'1-99'"
               class="no-spinner"
@@ -46,14 +46,14 @@
             <app-text-input [formControl]="$any(registerForm.controls['name'])" [label]="'Введіть кличку за наявності'" [iPlaceholder]="'Масяня'"></app-text-input>
           </div>
         </div>
-        
+
 
         <div class="w-full sm:w-[100%]">
           <span class="ml-4 text-sm font-normal">Опишіть стан здоровʼя (максимум 24 символи)</span>
         <!-- Health -->
-        <app-text-input 
-          [formControl]="$any(registerForm.controls['health'])" 
-          [label]="'Опишіть стан здоровʼя (максимум 24 символи)'" 
+        <app-text-input
+          [formControl]="$any(registerForm.controls['health'])"
+          [label]="'Опишіть стан здоровʼя (максимум 24 символи)'"
           [iPlaceholder]="'Поранена лапка'"
           maxlength="24"
         ></app-text-input>
@@ -63,7 +63,7 @@
         <div class="flex flex-col">
           <span class="indent-4 text-sm font-normal">За необхідності опишіть більше деталей (максимум 100 символів)</span>
           <textarea
-            formControlName="$any(registerForm.controls['description'])"
+            formControlName="description"
             class="rounded-2xl border border-[#4A2C2A] bg-[#F6EBEA] px-6 py-3 placeholder:text-[#4A2C2A] placeholder:text-opacity-[50%] focus:outline-none"
             placeholder="Дуже слухняний і лагідний"
             style="resize: none"
@@ -87,7 +87,7 @@
               </button>
             </li>
           </ul>
-          
+
           <div class="max-w-[380px]">
             <label class="flex w-full items-center justify-center gap-6 rounded-full border-[3px] border-[#4A2C2A] px-[20px] py-3 transition duration-300 ease-in-out hover:bg-[#CAC0BF] cursor-pointer">
               <img class="h-8 w-8" src="icons/plus.png" alt="" />
@@ -104,7 +104,7 @@
         </div>
 
         <!-- Errors -->
-        <div *ngIf="validationErrors.length > 0" class="alert alert-danger">
+        <div *ngIf="validationErrors?.length > 0" class="alert alert-danger">
           <ul>
             <li *ngFor="let err of validationErrors" class="text-red-500">{{ err }}</li>
           </ul>
@@ -137,7 +137,7 @@
           </button>
         </li>
       </ul>
-      
+
       <div class="max-w-[380px]">
         <label class="flex w-full items-center justify-center gap-6 rounded-full border-[3px] border-[#4A2C2A] px-[80px] py-3 transition duration-300 ease-in-out hover:bg-[#CAC0BF] cursor-pointer">
           <img class="h-8 w-8" src="icons/plus.png" alt="" />

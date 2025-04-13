@@ -1,51 +1,145 @@
-<div class="account-container" *ngIf="!loading">
-  <div *ngIf="userRole === 'Shelter' && shelterData">
-    <h2>Кабінет притулку</h2>
-    <div class="shelter-info">
-      <h3>{{ shelterData.name }}</h3>
-      <p><strong>Адреса:</strong> {{ shelterData.address }}</p>
-      <p><strong>Телефон:</strong> {{ shelterData.phone }}</p>
-      <p><strong>Категорія:</strong> {{ shelterData.category }}</p>
-
-      <!-- Додаткові елементи для притулку -->
-      <div class="shelter-actions">
-        <button routerLink="/shelter/animals" class="btn btn-primary">Мої тварини</button>
-        <button routerLink="/shelter/requests" class="btn btn-secondary">Запити волонтерів</button>
-        <button routerLink="/shelter/likes" class="btn btn-info">Лайки волонтерів</button>
+<div class="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8" *ngIf="!loading">
+  <!-- Shelter Account -->
+  <div *ngIf="userRole === 'Shelter' && shelterData" class="max-w-6xl mx-auto">
+    <div class="bg-white shadow-xl rounded-2xl overflow-hidden">
+      <!-- Shelter Header -->
+      <div class="bg-gradient-to-r from-[#D4A59A] to-[#4A2C2A] p-6 text-white">
+        <div class="flex justify-between items-start">
+          <div>
+            <h2 class="text-2xl font-bold">Кабінет притулку</h2>
+            <h1 class="text-3xl font-bold mt-2">{{ shelterData.name }}</h1>
+          </div>
+          <button (click)="logout()" class="px-4 py-2 bg-white text-[#4A2C2A] rounded-lg font-medium hover:bg-gray-100 transition-colors">
+            Вийти
+          </button>
+        </div>
       </div>
 
-      <app-animal-list [inputAnimals]="shelterData.announcements" [isAuthor]="true"></app-animal-list>
+      <!-- Shelter Info -->
+      <div class="p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="md:col-span-1">
+          <div class="bg-[#F6EBEA] rounded-xl p-5 h-full">
+            <h3 class="text-xl font-semibold text-[#4A2C2A] mb-4">Контактна інформація</h3>
+            <div class="space-y-4">
+              <div>
+                <p class="text-sm text-gray-500">Адреса</p>
+                <p class="font-medium">{{ shelterData.address }}</p>
+              </div>
+              <div>
+                <p class="text-sm text-gray-500">Телефон</p>
+                <p class="font-medium">{{ shelterData.phone }}</p>
+              </div>
+              <div>
+                <p class="text-sm text-gray-500">Категорія</p>
+                <p class="font-medium">{{ shelterData.category }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Shelter Actions -->
+        <div class="md:col-span-2">
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+            <button routerLink="/shelter/animals"
+                    class="bg-[#D4A59A] hover:bg-[#4A2C2A] text-white py-3 px-4 rounded-xl transition-colors flex flex-col items-center">
+              <svg class="w-8 h-8 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.75 21h16.5M4.5 3h15m-16.5 18v-8.25m0 0h16.5m-16.5 0V3m16.5 18v-8.25m0 0V3m0 18h16.5m-16.5 0h15"/>
+              </svg>
+              Мої тварини
+            </button>
+            <button routerLink="/shelter/requests"
+                    class="bg-white border border-[#D4A59A] hover:bg-[#F6EBEA] text-[#4A2C2A] py-3 px-4 rounded-xl transition-colors flex flex-col items-center">
+              <svg class="w-8 h-8 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+              </svg>
+              Запити
+            </button>
+            <button routerLink="/shelter/likes"
+                    class="bg-white border border-[#D4A59A] hover:bg-[#F6EBEA] text-[#4A2C2A] py-3 px-4 rounded-xl transition-colors flex flex-col items-center">
+              <svg class="w-8 h-8 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+              </svg>
+              Лайки
+            </button>
+          </div>
+
+          <h3 class="text-xl font-semibold text-[#4A2C2A] mb-4">Оголошення притулку</h3>
+          <app-animal-list [inputAnimals]="shelterData.announcements" [isAuthor]="true"></app-animal-list>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div *ngIf="userRole === 'Volunteer' && volunteerData">
-    <h2>Кабінет волонтера</h2>
-    <div class="volunteer-info">
-      <h3>{{ volunteerData.name }}</h3>
-      <p><strong>Телефон:</strong> {{ volunteerData.phone || 'Не вказано' }}</p>
-      <p><strong>Інтереси:</strong> {{ volunteerData.interests || 'Не вказано' }}</p>
-      <p><strong>Локація:</strong> {{ volunteerData.location || 'Не вказано' }}</p>
+  <!-- Volunteer Account -->
+  <div *ngIf="userRole === 'Volunteer' && volunteerData" class="max-w-4xl mx-auto">
+    <div class="bg-white shadow-xl rounded-2xl overflow-hidden">
+      <!-- Volunteer Header -->
+      <div class="bg-gradient-to-r from-[#4A2C2A] to-[#D4A59A] p-6 text-white">
+        <div class="flex justify-between items-start">
+          <div>
+            <h2 class="text-2xl font-bold">Кабінет волонтера</h2>
+            <h1 class="text-3xl font-bold mt-2">{{ volunteerData.name }}</h1>
+          </div>
+          <button (click)="logout()" class="px-4 py-2 bg-white text-[#4A2C2A] rounded-lg font-medium hover:bg-gray-100 transition-colors">
+            Вийти
+          </button>
+        </div>
+      </div>
 
-      <!-- Додаткові елементи для волонтера -->
-      <!-- <div class="volunteer-actions">
-        <button routerLink="/volunteer/requests" class="btn btn-secondary">Мої запити</button>
-      </div> -->
+      <!-- Volunteer Info -->
+      <div class="p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="md:col-span-1">
+          <div class="bg-[#F6EBEA] rounded-xl p-5 h-full">
+            <h3 class="text-xl font-semibold text-[#4A2C2A] mb-4">Мій профіль</h3>
+            <div class="space-y-4">
+              <div>
+                <p class="text-sm text-gray-500">Телефон</p>
+                <p class="font-medium">{{ volunteerData.phone || 'Не вказано' }}</p>
+              </div>
+              <div>
+                <p class="text-sm text-gray-500">Інтереси</p>
+                <p class="font-medium">{{ volunteerData.interests || 'Не вказано' }}</p>
+              </div>
+              <div>
+                <p class="text-sm text-gray-500">Локація</p>
+                <p class="font-medium">{{ volunteerData.location || 'Не вказано' }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
 
-      <app-fav-list></app-fav-list>
+        <div class="md:col-span-2">
+          <h3 class="text-xl font-semibold text-[#4A2C2A] mb-4">Улюблені тварини</h3>
+          <app-fav-list></app-fav-list>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div *ngIf="userRole === 'Unknown'">
-    <div class="alert alert-warning">
-      Не вдалося визначити тип облікового запису. Будь ласка, зверніться до підтримки.
+  <!-- Unknown Role -->
+  <div *ngIf="userRole === 'Unknown'" class="max-w-md mx-auto">
+    <div class="bg-white shadow-xl rounded-2xl overflow-hidden">
+      <div class="bg-red-100 p-6 text-red-800">
+        <h2 class="text-xl font-bold">Помилка</h2>
+      </div>
+      <div class="p-6 text-center">
+        <svg class="mx-auto h-12 w-12 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+        </svg>
+        <h3 class="mt-2 text-lg font-medium text-gray-900">Не вдалося визначити тип облікового запису</h3>
+        <p class="mt-1 text-gray-500">Будь ласка, зверніться до служби підтримки</p>
+        <button (click)="logout()" class="mt-4 px-4 py-2 bg-[#D4A59A] text-white rounded-lg font-medium hover:bg-[#4A2C2A] transition-colors">
+          Вийти
+        </button>
+      </div>
     </div>
   </div>
-
-  <button (click)="logout()" class="btn btn-danger mt-3">Вийти</button>
 </div>
 
-<div *ngIf="loading" class="loading-spinner">
-  <div class="spinner-border text-primary" role="status">
-    <span class="visually-hidden">Завантаження...</span>
+<!-- Loading State -->
+<div *ngIf="loading" class="min-h-screen flex items-center justify-center">
+  <div class="text-center">
+    <div class="w-16 h-16 border-4 border-[#D4A59A] border-t-transparent rounded-full animate-spin mx-auto"></div>
+    <p class="mt-4 text-lg font-medium text-[#4A2C2A]">Завантаження даних...</p>
   </div>
 </div>

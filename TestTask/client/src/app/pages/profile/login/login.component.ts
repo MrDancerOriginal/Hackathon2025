@@ -37,7 +37,7 @@ export class LoginComponent {
           if (response.result && response.token && response.id) {
             this.authService.storeToken(response.token, response.id);
             this.toastr.success("Успішна авторизація");
-            this.router.navigate(['/']); // Redirect to home or dashboard
+            this.router.navigate(['/profile']); // Redirect to home or dashboard
           } else if (response.errors) {
 
             let message;

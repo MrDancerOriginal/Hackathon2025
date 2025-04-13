@@ -96,6 +96,7 @@ export class AddAnimalComponent {
     formData.append('Species', this.registerForm.get('species')?.value || '');
     formData.append('Age', this.registerForm.get('age')?.value || '');
     formData.append('Health', this.registerForm.get('health')?.value || '');
+    formData.append('UserId', this.authService.getUserId());
 
     // Append photos if any
     if (this.uploader.queue.length > 0) {
@@ -106,7 +107,7 @@ export class AddAnimalComponent {
       formData.append('Photos', new Blob(), ''); // Send empty file if no photos
     }
 
-    this.animalService.addAnimal(formData).subscribe({
+    this.animalService.addAnimal(formData, this.authService.getUserId()).subscribe({
       next: () => {
         this.toastr.success('Оголошення успішно додано');
         this.router.navigateByUrl('/animals');

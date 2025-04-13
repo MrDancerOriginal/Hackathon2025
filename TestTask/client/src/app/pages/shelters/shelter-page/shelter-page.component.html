@@ -1,35 +1,81 @@
-<div class="shelter-container">
-  <!-- Shelter Information Section -->
-  <div class="shelter-header">
-    <h1 class="shelter-name">{{ shelter.name }}</h1>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+  <!-- Shelter Header Section -->
+  <div class="bg-white rounded-2xl shadow-lg overflow-hidden mb-8">
+    <!-- Shelter Cover Image -->
+    <div class="h-48 bg-gradient-to-r from-[#F6EBEA] to-[#D4A59A] flex items-center justify-center">
+      <svg class="w-20 h-20 text-[#4A2C2A]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.828 16.828a4 4 0 01-5.656 0M12 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+      </svg>
+    </div>
 
-    <div class="shelter-details">
-      <div class="detail-item">
-        <i class="fas fa-map-marker-alt"></i>
-        <span>{{ shelter.address }}</span>
+    <!-- Shelter Info -->
+    <div class="px-6 py-4">
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between">
+        <div class="mb-4 md:mb-0">
+          <h1 class="text-3xl font-bold text-[#4A2C2A]">{{ shelter.name }}</h1>
+          <div class="mt-2 inline-block bg-[#F6EBEA] text-[#4A2C2A] text-sm px-3 py-1 rounded-full font-medium">
+            {{ getCategoryName(shelter.category) }}
+          </div>
+        </div>
+
+        <div class="flex space-x-3">
+          <button class="px-4 py-2 bg-[#D4A59A] hover:bg-[#4A2C2A] text-white rounded-lg transition-colors duration-200 flex items-center">
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+            </svg>
+            Подзвонити
+          </button>
+          <button class="px-4 py-2 border border-[#D4A59A] text-[#4A2C2A] hover:bg-[#F6EBEA] rounded-lg transition-colors duration-200 flex items-center">
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+            </svg>
+            Маршрут
+          </button>
+        </div>
       </div>
 
-      <div class="detail-item">
-        <i class="fas fa-phone"></i>
-        <span>{{ shelter.phone }}</span>
-      </div>
+      <!-- Shelter Details -->
+      <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="flex items-start">
+          <svg class="w-6 h-6 text-[#D4A59A] mt-1 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+          </svg>
+          <div>
+            <h3 class="text-sm font-medium text-gray-500">Адреса</h3>
+            <p class="text-[#4A2C2A]">{{ shelter.address }}</p>
+          </div>
+        </div>
 
-      <div class="detail-item">
-        <i class="fas fa-paw"></i>
-        <span>{{ getCategoryName(shelter.category) }}</span>
+        <div class="flex items-start">
+          <svg class="w-6 h-6 text-[#D4A59A] mt-1 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+          </svg>
+          <div>
+            <h3 class="text-sm font-medium text-gray-500">Телефон</h3>
+            <p class="text-[#4A2C2A]">{{ shelter.phone }}</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
   <!-- Announcements Section -->
-  <div class="announcements-section">
-    <h2 class="section-title">Наші підопічні</h2>
-
-    <div *ngIf="shelter.announcements.length === 0" class="no-pets">
-      <p>Наразі немає тварин, які потребують дому</p>
+  <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+    <div class="px-6 py-4 border-b border-gray-200">
+      <h2 class="text-2xl font-bold text-[#4A2C2A]">Наші підопічні</h2>
     </div>
 
-    <div class="announcements-grid">
+    <div *ngIf="shelter.announcements.length === 0" class="p-8 text-center">
+      <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+      </svg>
+      <h3 class="mt-2 text-lg font-medium text-[#4A2C2A]">Наразі немає тварин</h3>
+      <p class="mt-1 text-sm text-gray-500">Спробуйте перевірити пізніше</p>
+    </div>
+
+    <div *ngIf="shelter.announcements.length > 0" class="p-6">
       <app-animal-list [inputAnimals]="shelter.announcements"></app-animal-list>
     </div>
   </div>

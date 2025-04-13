@@ -1,3 +1,7 @@
-<div class="col-2" *ngFor="let shelter of shelters">
-  <app-shelter-card [shelter]="shelter"></app-shelter-card>
+<div class="shelter-list">
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+    <div *ngFor="let shelter of shelters" class="transition-transform duration-300 hover:scale-[1.02]">
+      <app-shelter-card [shelter]="shelter"></app-shelter-card>
+    </div>
+  </div>
 </div>

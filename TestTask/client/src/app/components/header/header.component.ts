@@ -13,10 +13,11 @@ export class HeaderComponent {
    *
    */
   constructor(private authService: AuthService) {
-
+    console.log(this.isLoggedIn());
   }
 
   isLoggedIn(){
-    return this.authService.isLoggedIn;
+
+    return this.authService.isLoggedIn();
   }
 }

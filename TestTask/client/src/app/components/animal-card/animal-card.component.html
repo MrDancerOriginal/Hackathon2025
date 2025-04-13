@@ -1,11 +1,53 @@
+<div class="max-w-sm rounded-xl overflow-hidden shadow-lg bg-white hover:shadow-xl transition-shadow duration-300 border border-gray-100">
+  <!-- Animal Image Placeholder (you can replace with actual image) -->
+  <div class="h-48 bg-gradient-to-r from-amber-50 to-orange-100 flex items-center justify-center">
+    <svg class="w-20 h-20 text-orange-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21"></path>
+    </svg>
+  </div>
 
-<div >
-  <a routerLink="/animals/{{animal.id}}" routerLinkActive="active">{{animal.name}}</a>
+  <div class="px-6 py-4">
+    <!-- Name with link -->
+    <a routerLink="/animals/{{animal.id}}" routerLinkActive="active"
+       class="text-2xl font-bold text-gray-800 hover:text-orange-500 transition-colors duration-200 mb-2 inline-block">
+      {{animal.name || 'Без імені'}}
+    </a>
 
-  {{animal.age}}
-  {{animal.species}}
+    <!-- Species and Age -->
+    <div class="flex items-center gap-3 mb-3">
+      <span class="inline-block bg-orange-100 text-orange-800 text-xs px-2 py-1 rounded-full font-semibold">
+        {{animal.species || 'Невідомий вид'}}
+      </span>
+      <span class="text-gray-600 text-sm">
+        {{animal.age ? animal.age + ' років' : 'Вік невідомий'}}
+      </span>
+    </div>
 
-  <button *ngIf="isAuthor" (click)="onDelete()" class="delete-button">
-    Delete
-  </button>
+    <!-- Description -->
+    <p class="text-gray-600 text-base mb-4 line-clamp-2">
+      {{animal.description || 'Опис відсутній'}}
+    </p>
+
+    <!-- Health status -->
+    <div class="flex items-center mb-4">
+      <span class="text-sm font-medium mr-2">Стан здоров'я:</span>
+      <span [ngClass]="{
+        'text-green-600': animal.health === 'healthy',
+        'text-yellow-600': animal.health === 'needs_care',
+        'text-red-600': animal.health === 'urgent'
+      }">
+        {{animal.health === 'healthy' ? 'Здоровий' :
+          animal.health === 'needs_care' ? 'Потребує догляду' :
+          animal.health === 'urgent' ? 'Терміново до лікаря' : 'Невідомо'}}
+      </span>
+    </div>
+
+    <!-- Delete button (visible only for author) -->
+    <div class="flex justify-end">
+      <button *ngIf="isAuthor" (click)="onDelete()"
+              class="text-white bg-red-500 hover:bg-red-600 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 transition-colors duration-200">
+        Видалити
+      </button>
+    </div>
+  </div>
 </div>

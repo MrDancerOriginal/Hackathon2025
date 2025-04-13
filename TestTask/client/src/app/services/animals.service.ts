@@ -14,7 +14,12 @@ export class AnimalsService {
 
   constructor(private http: HttpClient) { }
 
-  addAnimal(model: any) {
+  addAnimal(model: any, userId : string) {
+
+    const value = {userId, model}
+
+    console.log(value)
+
     return this.http.post<Animal>(this.baseUrl + 'animals', model);
   }
 
