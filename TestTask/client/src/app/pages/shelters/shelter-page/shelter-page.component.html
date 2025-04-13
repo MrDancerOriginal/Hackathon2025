@@ -1,6 +1,6 @@
-<div class="shelter-container">
+<!-- <div class="shelter-container"> -->
   <!-- Shelter Information Section -->
-  <div class="shelter-header">
+  <!-- <div class="shelter-header">
     <h1 class="shelter-name">{{ shelter.name }}</h1>
 
     <div class="shelter-details">
@@ -19,10 +19,10 @@
         <span>{{ getCategoryName(shelter.category) }}</span>
       </div>
     </div>
-  </div>
+  </div> -->
 
   <!-- Announcements Section -->
-  <div class="announcements-section">
+  <!-- <div class="announcements-section">
     <h2 class="section-title">Наші підопічні</h2>
 
     <div *ngIf="shelter.announcements.length === 0" class="no-pets">
@@ -33,4 +33,63 @@
       <app-animal-list [inputAnimals]="shelter.announcements"></app-animal-list>
     </div>
   </div>
-</div>
+</div> -->
+
+<section class="mx-auto mt-[50px] max-w-[1290px] text-[#4A2C2A]">
+  <div class="flex w-full flex-col items-start justify-between gap-8 lg:flex-row">
+    <figure class="flex w-full justify-center lg:w-[45%]">
+      <img
+        class="h-auto w-[60%] rounded-3xl lg:h-[516px] lg:w-[516px]"
+        src="organization.jpg"
+        alt=""
+      />
+    </figure>
+    <div class="mx-auto w-[92%] lg:w-[40%]">
+      <div class="flex flex-col gap-4">
+        <div class="flex flex-col sm:flex-row">
+          <p class="w-[20%]">Роль:</p>
+          <p class="w-[70%] font-bold">Організація</p>
+        </div>
+
+        <div class="flex flex-col sm:flex-row">
+          <p class="w-[20%]">Категорія:</p>
+          <p class="w-[70%] font-bold">Притулок</p>
+        </div>
+
+        <div class="flex flex-col sm:flex-row">
+          <p class="w-[20%]">Назва:</p>
+          <p class="w-[70%] break-words font-bold">Хвостате щастя</p>
+        </div>
+
+        <div class="flex flex-col sm:flex-row">
+          <p class="w-[20%]">Email:</p>
+          <p class="w-[70%] font-bold">macoxef553#dpcos.com</p>
+        </div>
+
+        <div class="flex flex-col sm:flex-row">
+            <p class="w-[20%]">Адреса:</p>
+            <p class="w-[70%] break-words font-bold">
+              Хатинка на Дереві 12, Ліс Чарів, околиці Смарагдового Міста, Країна Оз
+            </p>
+          </div>
+
+        <div class="flex flex-col sm:flex-row">
+          <p class="w-[20%]">Телефон:</p>
+          <p class="w-[70%] font-bold">+380 98 490 0319</p>
+        </div>
+      </div>
+      <div class="mt-8 flex justify-between">
+        <button
+          class="w-[48%] rounded-3xl border-[3px] border-[#4A2C2A] px-8 py-2 transition duration-300 ease-in-out hover:bg-[#CAC0BF]"
+        >
+          <p>Редагувати профіль</p>
+        </button>
+        <button
+          class="w-[48%] rounded-3xl border-[3px] border-[#4A2C2A] px-8 py-2 transition duration-300 ease-in-out hover:bg-[#CAC0BF]"
+        >
+          <p>Змінити пароль</p>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>

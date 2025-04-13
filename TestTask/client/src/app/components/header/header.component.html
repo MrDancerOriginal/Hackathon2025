@@ -1,54 +1,39 @@
 <header>
-    <div class="relative mx-auto my-5 max-w-[1290px]">
-      <div class="flex w-full items-center justify-between">
-        <figure>
-          <img class="w-[185px]" src="/logo.png" alt="logo" />
-        </figure>
-        <nav class="text-brown">
-          <ul class="flex items-center gap-6">
-            <li><a href="/animals" class="text-xl">Знайти улюбленця</a></li>
-            <li><a href="/shelters" class="text-xl">Притулки</a></li>
-            <li><a href="#" class="text-xl">Pet Stories</a></li>
-          </ul>
-        </nav>
+  <div class="relative mx-auto my-5 max-w-[1290px] px-6">
+    <div class="flex w-full items-center justify-between">
+      <figure>
+        <img class="w-[185px]" src="logo.png" alt="logo" />
+      </figure>
+      <nav class="hidden text-[#4A2C2A] lg:block">
+        <ul class="flex items-center gap-6">
+          <li><a href="#">Знайти улюбленця</a></li>
+          <li><a href="#">Притулки</a></li>
+          <li><a href="#">Pet Stories</a></li>
+        </ul>
+      </nav>
 
-        <div class="relative z-20 flex flex-row items-center space-x-6">
-          <ng-container *ngIf="!isLoggedIn; else profileLink">
-            <a href="/login" class="text-brown text-xl mr-sm text-center block">Увійти</a>
-            <a
-              href="/register"
-              class="bg-[#4A2C2A] hover:bg-brown-hover rounded-full px-14 py-3 text-[#FFF9F7] transition duration-300 ease-in-out text-xl block">
-              Реєстрація
-            </a>
-          </ng-container>
-
-          <ng-template #profileLink>
-            <div class="relative z-20 hidden items-center gap-6 lg:flex">
-              <a href="#" class="flex items-center gap-2 text-[#4A2C2A]">
-                <img class="h-8 w-8" src="icons/user.png" alt="" />
-                <span>Мій Профіль</span>
-                <img class="h-4 w-4" src="icons/down.png" alt="" />
-              </a>
-              <a
-                href="add-animal"
-                class="rounded-full bg-[#4A2C2A] px-5 py-4 text-[#FFF9F7] transition duration-300 ease-in-out hover:bg-[#3D2523]"
-              >
-                Створити оголошення
-              </a>
-            </div>
-  
-            <button id="open-btn" class="relative z-20 mr-5 block lg:hidden">
-              <figure>
-                <img class="h-10 w-10" src="icons/burger.png" alt="" />
-              </figure>
-            </button>
-          </ng-template>
-        </div>
-
-
+      <div class="relative z-20 hidden items-center gap-6 lg:flex">
+        <a href="#" class="flex items-center gap-2 text-[#4A2C2A]">
+          <img class="h-8 w-8" src="icons/user.png" alt="" />
+          <span>Мій Профіль</span>
+          <img class="h-4 w-4" src="icons/down.png" alt="" />
+        </a>
+        <a
+          href="create-advert.html"
+          class="rounded-full bg-[#4A2C2A] px-5 py-4 text-[#FFF9F7] transition duration-300 ease-in-out hover:bg-[#3D2523]"
+        >
+          Створити оголошення
+        </a>
       </div>
+
+      <button id="open-btn" class="relative z-20 mr-5 block lg:hidden">
+        <figure>
+          <img class="h-10 w-10" (click)="openMenu.emit()" #openBtn src="icons/burger.png" alt="" />
+        </figure>
+      </button>
     </div>
-    <figure class="absolute right-0 top-0 h-auto w-[200px]">
-      <img src="bg/trace/trace-1.png" alt="" />
-    </figure>
+  </div>
+  <figure class="absolute right-0 top-0 h-auto w-[200px]">
+    <img src="bg/trace/trace-1.png" alt="" />
+  </figure>
 </header>

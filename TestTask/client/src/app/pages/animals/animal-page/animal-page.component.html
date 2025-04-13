@@ -1,4 +1,86 @@
-{{animal.name}}
+<!-- {{animal.name}}
 
 <button class="btn btn-primary" (click)="addLike(animal)">Відгукнутись</button>
-<button class="btn btn-secondary" (click)="addFav(animal)">В улюблені</button>
+<button class="btn btn-secondary" (click)="addFav(animal)">В улюблені</button> -->
+
+<section class="mx-auto max-w-[1290px] text-[#4A2C2A] px-4">
+    <div class="flex flex-col lg:flex-row gap-6">
+      <div class="w-full flex flex-col items-center lg:w-[70%]">
+        <figure class="h-auto flex justify-center w-full rounded-3xl">
+          <img src="pet-page/pet-large.jpg" alt="" />
+        </figure>
+        <ul class="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4 w-full">
+          <li class="aspect-[4/3] rounded-3xl overflow-hidden">
+            <img class="w-full h-full object-cover" src="pet-page/pet-img-1.jpg" alt="" />
+          </li>
+          <li class="aspect-[4/3] rounded-3xl overflow-hidden">
+            <img class="w-full h-full object-cover" src="pet-page/pet-img-2.jpg" alt="" />
+          </li>
+          <li class="aspect-[4/3] rounded-3xl overflow-hidden">
+            <img class="w-full h-full object-cover" src="pet-page/pet-img-3.jpg" alt="" />
+          </li>
+          <li class="aspect-[4/3] rounded-3xl overflow-hidden">
+            <img class="w-full h-full object-cover" src="pet-page/pet-img-4.jpg" alt="" />
+          </li>
+        </ul>
+      </div>
+
+      <div class="w-[90%] px-4 lg:px-0 mx-auto lg:w-[30%]">
+        <div class="flex justify-center lg:justify-start gap-4">
+          <h1 class="text-2xl font-bold">Собака Алабай</h1>
+          <img class="h-8 w-8" src="icons/not-like.png" alt="" />
+        </div>
+        <div class="mt-6 flex flex-col gap-4">
+          <div class="flex justify-between">
+            <p class="w-[18%]">Кличка:</p>
+            <p class="font-bold w-[73%]">Лєксус</p>
+          </div>
+
+          <div class="flex justify-between">
+            <p class="w-[18%]">Вік:</p>
+            <p class="font-bold w-[73%]">3 роки</p>
+          </div>
+
+          <div class="flex justify-between">
+            <p class="w-[18%]">Вид:</p>
+            <p class="font-bold w-[73%]">Середньоазійська вівчарка (алабай)</p>
+          </div>
+
+          <div class="flex justify-between">
+            <p class="w-[18%]">Місто:</p>
+            <p class="font-bold w-[73%]">Тернопіль</p>
+          </div>
+
+          <div class="flex justify-between">
+            <p class="w-[18%]">Стан здоровʼя:</p>
+            <p class="font-bold w-[73%]">Зламана передня лапа</p>
+          </div>
+
+          <div class="flex justify-between">
+            <p class="w-[18%]">Опис:</p>
+            <p class="font-bold w-[73%]">
+              Це врівноважений пес із лагідною вдачею та захисним інстинктом властивим своїй
+              породі, який попри зламану лапу зберіг довіру до людей і життєрадісність.
+            </p>
+          </div>
+        </div>
+
+        <div class="mt-16 flex flex-col gap-4">
+          <button
+            href="create-advert.html"
+            class="flex gap-4 items-center justify-center w-full rounded-full bg-[#4A2C2A] px-5 py-4 text-[#FFF9F7] transition duration-300 ease-in-out hover:bg-[#3D2523]"
+          >
+            <img class="h-8 w-8" src="icons/donate-light.png" alt="">
+            <p>Задонатити</p>
+          </button>
+          <button
+            href="create-advert.html"
+            class="flex gap-4 items-center justify-center w-full border-[3px] border-[#4A2C2A] rounded-full bg-[#FFF9F7] px-5 py-4 text-[#4A2C2A] transition duration-300 ease-in-out hover:bg-[#e4d1ca]"
+          >
+            <img class="h-8 w-8" src="icons/info.png" alt="">
+            <p>Котнактні дані притулку</p>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>

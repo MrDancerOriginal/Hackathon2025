@@ -24,6 +24,8 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'home', component: HomeComponent},
+  { path: 'shelter/animal', component: AnimalPageComponent},
+  { path: 'shelter', component: ShelterPageComponent},
   {
     path: '',
     runGuardsAndResolvers: 'always',
