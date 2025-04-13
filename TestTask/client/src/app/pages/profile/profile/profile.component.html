@@ -13,6 +13,8 @@
         <button routerLink="/shelter/requests" class="btn btn-secondary">Запити волонтерів</button>
         <button routerLink="/shelter/likes" class="btn btn-info">Лайки волонтерів</button>
       </div>
+
+      <app-animal-list [inputAnimals]="shelterData.announcements" [isAuthor]="true"></app-animal-list>
     </div>
   </div>
 

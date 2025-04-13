@@ -22,6 +22,10 @@ export class AnimalsService {
     return this.http.get<Animal[]>(this.baseUrl + 'animals');
   }
 
+  deleteAnimal(id: number): Observable<any> {
+    return this.http.delete(this.baseUrl + `/animals/${id}`);
+  }
+
   addFavorite(animal: Animal) {
     const favorites = this.getFavoritesFromStorage();
     // Check if animal already exists in favorites

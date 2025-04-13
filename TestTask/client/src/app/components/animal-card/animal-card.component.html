@@ -5,4 +5,7 @@
   {{animal.age}}
   {{animal.species}}
 
+  <button *ngIf="isAuthor" (click)="onDelete()" class="delete-button">
+    Delete
+  </button>
 </div>

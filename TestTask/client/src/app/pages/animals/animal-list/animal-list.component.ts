@@ -10,6 +10,7 @@ import { AnimalsService } from '../../../services/animals.service';
 })
 export class AnimalListComponent {
   @Input() inputAnimals : Animal[] = [];
+  @Input() isAuthor = false;
   animals: Animal[] = [];
   filteredAnimals: Animal[] = [];
 
