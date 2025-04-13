@@ -15,9 +15,10 @@ export class RegisterComponent {
   registerForm: FormGroup;
   roles = ['Shelter', 'Volunteer'];
   shelterCategories = [
-    ShelterCategory.DogCatShelter,
-    ShelterCategory.Kennel,
-    ShelterCategory.VetClinic
+    "Ветклініка",
+    "Притулок для собак та котів",
+    "Розплідник",
+    "Інше"
   ];
   errorMessages: string[] = [];
 
@@ -109,6 +110,7 @@ export class RegisterComponent {
         })
       };
 
+      console.log(requestData);
       this.authService.register(requestData).subscribe({
         next: (response) => {
           if (response.result && response.token && response.id) {

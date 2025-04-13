@@ -6,7 +6,7 @@ export interface Shelter {
   name: string;
   address: string;
   phone: string;
-  category: ShelterCategory;
+  category: string;
   announcements?: Animal[];
   // requests?: Request[]; // Uncomment if Request model is available
 }
