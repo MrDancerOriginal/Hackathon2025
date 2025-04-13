@@ -24,7 +24,7 @@ namespace ShelterService.Models.DTOs
         // Додаткові поля для притулку
         public string? ShelterName { get; set; }
         public string? Address { get; set; }
-        public ShelterCategory? Category { get; set; }
+        public string? Category { get; set; }
 
         // Додаткові поля для волонтера
         public string? FullName { get; set; }
