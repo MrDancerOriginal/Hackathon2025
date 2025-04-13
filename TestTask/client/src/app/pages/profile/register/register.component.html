@@ -1,63 +1,98 @@
 <div class="register-container">
   <h2>Register</h2>
   <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-
-    <app-text-input
-      [formControl]="$any(registerForm.controls['name'])"
-      [label]="'Ім\'я'"
-    ></app-text-input>
-
-    <app-text-input
-      [formControl]="$any(registerForm.controls['email'])"
-      [label]="'email'"
-    ></app-text-input>
-
-    <app-text-input
-      [formControl]="$any(registerForm.controls['password'])"
-      [label]="'Пароль'"
-    ></app-text-input>
-
+    <!-- Common fields -->
     <div class="form-group">
       <label for="role">Role</label>
-      <select id="role" formControlName="role" class="form-control" (change)="onRoleChange()">
+      <select
+        id="role"
+        formControlName="role"
+        class="form-control"
+        (change)="onRoleChange()"
+      >
         <option value="">Select a role</option>
-        <option *ngFor="let role of roles" [value]="role">{{role}}</option>
+        <option *ngFor="let role of roles" [value]="role">{{ role }}</option>
       </select>
-      <div *ngIf="registerForm.get('role')?.invalid && registerForm.get('role')?.touched" class="error-message">
+      <div
+        *ngIf="registerForm.get('role')?.invalid && registerForm.get('role')?.touched"
+        class="error-message"
+      >
         Role is required
       </div>
     </div>
 
-    <!-- Додаткові поля для Shelter -->
-    <div *ngIf="registerForm.get('role')?.value === 'Shelter'">
-      <div class="form-group">
-        <label for="category">Категорія закладу</label>
-        <select id="category" formControlName="category" class="form-control">
-          <option value="">Оберіть категорію</option>
-          <option *ngFor="let category of shelterCategories" [value]="category">{{category}}</option>
-        </select>
-        <div *ngIf="registerForm.get('category')?.invalid && registerForm.get('category')?.touched" class="error-message">
-          Категорія обов'язкова для притулків
-        </div>
-      </div>
+    <app-text-input
+      [formControl]="$any(registerForm.controls['email'])"
+      [label]="'Email'"
+      type="email"
+    ></app-text-input>
 
+    <app-text-input
+      [formControl]="$any(registerForm.controls['password'])"
+      [label]="'Password'"
+      type="password"
+    ></app-text-input>
+
+    <app-text-input
+      [formControl]="$any(registerForm.controls['location'])"
+      [label]="'Location'"
+    ></app-text-input>
+
+    <app-text-input
+      [formControl]="$any(registerForm.controls['phone'])"
+      [label]="'Phone Number'"
+      type="tel"
+    ></app-text-input>
+
+    <div *ngIf="registerForm.get('role')?.value === 'Shelter'">
       <app-text-input
-        [formControl]="$any(registerForm.controls['address'])"
-        [label]="'Адреса'"
+        [formControl]="$any(registerForm.controls['shelterName'])"
+        [label]="'Shelter Name'"
+        [required]="true"
       ></app-text-input>
 
       <app-text-input
-        [formControl]="$any(registerForm.controls['phoneNumber'])"
-        [label]="'Номер телефону'"
+        [formControl]="$any(registerForm.controls['address'])"
+        [label]="'Address'"
+        [required]="true"
+      ></app-text-input>
+
+      <div class="form-group">
+        <label for="category">Shelter Category</label>
+        <select
+          id="category"
+          formControlName="category"
+          class="form-control"
+          required
+        >
+          <option value="">Select category</option>
+          <option *ngFor="let category of shelterCategories" [value]="category">
+            {{ category }}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <div *ngIf="registerForm.get('role')?.value === 'Volunteer'">
+      <app-text-input
+        [formControl]="$any(registerForm.controls['fullName'])"
+        [label]="'Full Name'"
+        [required]="true"
       ></app-text-input>
     </div>
 
     <div *ngIf="errorMessages.length > 0" class="alert alert-danger">
       <ul>
-        <li *ngFor="let error of errorMessages">{{error}}</li>
+        <li *ngFor="let error of errorMessages">{{ error }}</li>
       </ul>
     </div>
 
-    <button type="submit" class="btn btn-primary" [disabled]="registerForm.invalid">Register</button>
+    <button
+      type="submit"
+      class="btn btn-primary"
+      [disabled]="registerForm.invalid"
+    >
+      Register
+    </button>
   </form>
 </div>
