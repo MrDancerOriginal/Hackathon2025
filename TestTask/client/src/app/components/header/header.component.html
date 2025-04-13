@@ -15,14 +15,22 @@
           </ul>
         </nav>
 
-        <div class="relative z-20 flex items-center gap-6">
-          <a href="/login" class="text-brown">Увійти</a>
-          <a
-            href="/register"
-            class="bg-[#4A2C2A] hover:bg-brown-hover rounded-full px-14 py-3 text-[#FFF9F7] transition duration-300 ease-in-out">
-            Реєстрація
-          </a>
+        <div class="relative z-20 ">
+          <ng-container class="flex items-center gap-6" *ngIf="!isLoggedIn; else profileLink">
+            <a href="/login" class="text-brown">Увійти</a>
+            <a
+              href="/register"
+              class="bg-[#4A2C2A] hover:bg-brown-hover rounded-full px-14 py-3 text-[#FFF9F7] transition duration-300 ease-in-out">
+              Реєстрація
+            </a>
+          </ng-container>
+
+          <ng-template #profileLink>
+            <a href="/profile" class="text-brown">Профіль</a>
+          </ng-template>
         </div>
+
+
       </div>
     </div>
     <figure class="absolute right-0 top-0 h-auto w-[200px]">
