@@ -10,6 +10,7 @@ export class TextInputComponent {
   @Input() label = '';
   @Input() type = 'text';
   @Input() isPassword = 'bool';
+  @Input() iPlaceholder = null;
 
   constructor(@Self() public ngControl: NgControl) {
     this.ngControl.valueAccessor = this;

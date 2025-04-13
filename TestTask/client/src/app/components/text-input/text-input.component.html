@@ -36,7 +36,7 @@
       class="w-full rounded-2xl border border-[#4A2C2A] bg-[#F6EBEA] px-6 py-3 pr-10 focus:outline-none placeholder:text-[#4A2C2A] placeholder:text-opacity-50"
       [class.border-red-500]="control.touched && control.invalid"
       [formControl]="control"
-      [placeholder]="label"
+      [placeholder]= "label"
     />
 
     <!-- Eye icon inside input -->

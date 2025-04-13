@@ -1,117 +1,156 @@
-<form [formGroup]="registerForm" (ngSubmit)="register()" autocomplete="off" [class.disabled-form]="isUploading">
-  <h2 class="text-center text-primary">Оголошення про тваринку</h2>
-  <hr />
+<!-- animal-registration.component.html -->
+<section class="mx-auto max-w-[1290px] px-4">
+  <form [formGroup]="registerForm" (ngSubmit)="register()" [class.disabled-form]="isUploading" autocomplete="off" class="flex flex-col gap-8 text-[#4A2C2A] items-center lg:items-start lg:flex-row lg:justify-between lg:gap-[30px]">
+    <div class="flex w-[90%] flex-col items-center lg:w-[50%]">
+      <div class="flex items-center gap-4">
+        <figure class="h-8 w-8"><img src="icons/paw.png" alt="" /></figure>
+        <h1 class="text-2xl font-bold">Додати тварину</h1>
+        <figure class="h-8 w-8"><img src="icons/paw.png" alt="" /></figure>
+      </div>
+      
+      <div class="mt-8 flex w-full flex-col gap-6">
+        <!-- Animal Type Dropdown -->
+        <div class="relative w-full">
+          <span class="ml-4 text-sm font-normal text-[#4A2C2A]">Оберіть вид тварини (обовʼязкове поле)</span>
+          <select formControlName="species" class="flex h-12 w-full items-center justify-between rounded-2xl border border-[#4A2C2A] bg-[#F6EBEA] px-6 py-3 focus:outline-none appearance-none">
+            <option value="" disabled selected>Оберіть вид тварини</option>
+            <option *ngFor="let type of animalTypes" [value]="type">{{ type }}</option>
+          </select>
+          <img class="absolute right-4 top-[42px] h-7 w-7 pointer-events-none" src="icons/down.png" alt="" />
+        </div>
 
-  <!-- Animal Info Form Fields -->
-  <app-text-input
-    [formControl]="$any(registerForm.controls['name'])"
-    [label]="'Ім\'я тваринки'"
-    [disabled]="isUploading">
-  </app-text-input>
+        <!-- City Dropdown -->
+        <div class="relative w-full">
+          <span class="ml-4 text-sm font-normal text-[#4A2C2A]">Оберіть місто перебування тварини (обовʼязкове поле)</span>
+          <select formControlName="city" class="flex h-12 w-full items-center justify-between rounded-2xl border border-[#4A2C2A] bg-[#F6EBEA] px-6 py-3 focus:outline-none appearance-none">
+            <option value="" disabled selected>Оберіть місто</option>
+            <option *ngFor="let city of cities" [value]="city">{{ city }}</option>
+          </select>
+          <img class="absolute right-4 top-[42px] h-7 w-7 pointer-events-none" src="icons/down.png" alt="" />
+        </div>
 
-  <app-text-input
-    [formControl]="$any(registerForm.controls['description'])"
-    [label]="'Опис тваринки'"
-    [disabled]="isUploading">
-  </app-text-input>
+        <!-- Age and Name -->
+        <div class="flex flex-col gap-4 sm:flex-row sm:gap-8">
+          <div class="w-full sm:w-[32%]">
+            <span class="ml-4 text-sm font-normal">Введіть вік цифрами</span>
+            <app-text-input 
+              [formControl]="$any(registerForm.controls['age'])" 
+              [label]="'Введіть вік цифрами'" 
+              type="number"
+              [iPlaceholder]="'1-99'"
+              class="no-spinner"
+            ></app-text-input>
+          </div>
+          <div class="w-full sm:w-[68%]">
+            <span class="ml-4 text-sm font-normal">Введіть кличку за наявності</span>
+            <app-text-input [formControl]="$any(registerForm.controls['name'])" [label]="'Введіть кличку за наявності'" [iPlaceholder]="'Масяня'"></app-text-input>
+          </div>
+        </div>
+        
 
-  <app-text-input
-    [formControl]="$any(registerForm.controls['species'])"
-    [label]="'Порода'"
-    [disabled]="isUploading">
-  </app-text-input>
-
-  <app-text-input
-    [formControl]="$any(registerForm.controls['age'])"
-    [label]="'Вік'"
-    [disabled]="isUploading">
-  </app-text-input>
-
-  <app-text-input
-    [formControl]="$any(registerForm.controls['health'])"
-    [label]="'Здоров\'я'"
-    [disabled]="isUploading">
-  </app-text-input>
-
-  <!-- File Upload Section -->
-  <div class="row mt-4">
-    <div class="col-12">
-      <h3>Фото тваринки</h3>
-
-      <!-- Drop Zone -->
-      <div ng2FileDrop
-           [ngClass]="{'nv-file-over': hasBaseDropZoneOver}"
-           (fileOver)="fileOverBase($event)"
-           [uploader]="uploader"
-           class="card bg-light p-4 text-center my-drop-zone mb-3">
-        <i class="fa fa-upload fa-3x mb-2"></i>
-        <p>Перетягніть фото сюди або</p>
-        <label class="btn btn-primary">
-          Оберіть файли
-          <input type="file" ng2FileSelect [uploader]="uploader" multiple hidden>
-        </label>
+        <div class="w-full sm:w-[100%]">
+          <span class="ml-4 text-sm font-normal">Опишіть стан здоровʼя (максимум 24 символи)</span>
+        <!-- Health -->
+        <app-text-input 
+          [formControl]="$any(registerForm.controls['health'])" 
+          [label]="'Опишіть стан здоровʼя (максимум 24 символи)'" 
+          [iPlaceholder]="'Поранена лапка'"
+          maxlength="24"
+        ></app-text-input>
       </div>
 
-      <!-- File Queue -->
-      <div class="file-queue" *ngIf="uploader.queue?.length > 0">
-        <h4>Файли для завантаження:</h4>
-        <ul class="list-group mb-3">
-          <li class="list-group-item d-flex justify-content-between align-items-center"
-              *ngFor="let item of uploader.queue">
-            <span>
-              <strong>{{ item?.file?.name }}</strong>
-              ({{ item?.file?.size/1024/1024 | number:'.2' }} MB)
-            </span>
-            <button class="btn btn-sm btn-danger"
-                    (click)="item.remove()"
-                    [disabled]="isUploading">
-              <i class="fa fa-times"></i>
-            </button>
-          </li>
-        </ul>
+        <!-- Description -->
+        <div class="flex flex-col">
+          <span class="indent-4 text-sm font-normal">За необхідності опишіть більше деталей (максимум 100 символів)</span>
+          <textarea
+            formControlName="$any(registerForm.controls['description'])"
+            class="rounded-2xl border border-[#4A2C2A] bg-[#F6EBEA] px-6 py-3 placeholder:text-[#4A2C2A] placeholder:text-opacity-[50%] focus:outline-none"
+            placeholder="Дуже слухняний і лагідний"
+            style="resize: none"
+            maxlength="100"
+            rows="3"
+          ></textarea>
+        </div>
 
-        <!-- Upload Progress -->
-        <div *ngIf="isUploading" class="mb-3">
-          <div class="progress">
-            <div class="progress-bar progress-bar-striped progress-bar-animated"
-                 role="progressbar"
-                 [style.width]="uploader.progress + '%'">
-              {{ uploader.progress }}%
+        <!-- Mobile File Upload -->
+        <div class="mt-6 flex h-auto min-h-[400px] flex-col items-center justify-between rounded-3xl border-[3px] border-[#4A2C2A] bg-[#F6EBEA] px-4 py-8 sm:px-[20px] sm:pb-[52px] sm:pt-[76px] lg:hidden">
+          <ul class="flex flex-col w-full">
+            <li *ngFor="let item of uploader.queue" class="flex items-center gap-2 justify-between">
+              <div class="flex items-center gap-2">
+                <img class="h-10 w-10" src="icons/file.png" alt="" />
+                <span class="decoration-1.5 font-normal underline decoration-[#4A2C2A] underline-offset-2">
+                  {{ item?.file?.name }} ({{ item?.file?.size/1024/1024 | number:'1.2-2' }} MB)
+                </span>
+              </div>
+              <button type="button" (click)="item.remove()" [disabled]="isUploading">
+                <img class="h-8 w-8 cursor-pointer" src="icons/trash.png" alt="" />
+              </button>
+            </li>
+          </ul>
+          
+          <div class="max-w-[380px]">
+            <label class="flex w-full items-center justify-center gap-6 rounded-full border-[3px] border-[#4A2C2A] px-[20px] py-3 transition duration-300 ease-in-out hover:bg-[#CAC0BF] cursor-pointer">
+              <img class="h-8 w-8" src="icons/plus.png" alt="" />
+              <span class="font-normal">Завантажити фото</span>
+              <input type="file" ng2FileSelect [uploader]="uploader" multiple accept="image/*" class="hidden">
+            </label>
+
+            <div class="mt-6">
+              <span class="font-normal text-[#4A2C2A] text-sm md:text-base text-opacity-50">
+                Завантажте не більше 3 фото формату png чи jpeg/jpg. Розмір файлу кожного файлу не повинен перевищувати 5 Мб.
+              </span>
             </div>
           </div>
         </div>
+
+        <!-- Errors -->
+        <div *ngIf="validationErrors.length > 0" class="alert alert-danger">
+          <ul>
+            <li *ngFor="let err of validationErrors" class="text-red-500">{{ err }}</li>
+          </ul>
+        </div>
+
+        <!-- Submit Button -->
+        <button
+          type="submit"
+          class="mt-8 w-full rounded-full bg-[#4A2C2A] py-5 text-white transition duration-300 ease-in-out hover:bg-[#3D2523] disabled:opacity-50"
+          [disabled]="!registerForm.valid || isUploading"
+        >
+          <ng-container *ngIf="!isUploading">Опублікувати</ng-container>
+          <ng-container *ngIf="isUploading">Завантаження...</ng-container>
+        </button>
       </div>
     </div>
-  </div>
 
-  <!-- Validation Errors -->
-  <div class="row" *ngIf="validationErrors">
-    <div class="col-12">
-      <div class="alert alert-danger">
-        <ul class="mb-0">
-          <li *ngFor="let error of validationErrors">
-            {{ error }}
-          </li>
-        </ul>
+    <!-- Desktop File Upload -->
+    <div class="hidden h-[655px] min-h-[400px] w-full flex-col items-center justify-between rounded-3xl border-[3px] border-[#4A2C2A] bg-[#F6EBEA] px-4 py-8 sm:px-[40px] sm:pb-[52px] sm:pt-[76px] lg:flex lg:w-[50%] xl:px-[112px]">
+      <ul class="flex flex-col w-full">
+        <li *ngFor="let item of uploader.queue" class="flex items-center gap-[54px] justify-between">
+          <div class="flex items-center gap-[54px]">
+            <img class="h-16 w-16" src="icons/file.png" alt="" />
+            <span class="decoration-1.5 font-normal underline decoration-[#4A2C2A] underline-offset-2">
+              {{ item?.file?.name }} ({{ item?.file?.size/1024/1024 | number:'1.2-2' }} MB)
+            </span>
+          </div>
+          <button type="button" (click)="item.remove()" [disabled]="isUploading">
+            <img class="h-8 w-8 cursor-pointer" src="icons/trash.png" alt="" />
+          </button>
+        </li>
+      </ul>
+      
+      <div class="max-w-[380px]">
+        <label class="flex w-full items-center justify-center gap-6 rounded-full border-[3px] border-[#4A2C2A] px-[80px] py-3 transition duration-300 ease-in-out hover:bg-[#CAC0BF] cursor-pointer">
+          <img class="h-8 w-8" src="icons/plus.png" alt="" />
+          <span class="font-normal">Завантажити фото</span>
+          <input type="file" ng2FileSelect [uploader]="uploader" multiple accept="image/*" class="hidden">
+        </label>
+
+        <div class="mt-6">
+          <span class="font-normal text-[#4A2C2A] text-opacity-50">
+            Завантажте не більше 3 фото формату png чи jpeg/jpg. Розмір файлу кожного файлу не повинен перевищувати 5 Мб.
+          </span>
+        </div>
       </div>
     </div>
-  </div>
-
-  <!-- Form Actions -->
-  <div class="text-center mt-4">
-    <button class="btn btn-success me-2"
-            type="submit"
-            [disabled]="!registerForm.valid || isUploading">
-      <span *ngIf="!isUploading">Додати оголошення</span>
-      <span *ngIf="isUploading">
-        <i class="fa fa-spinner fa-spin"></i> Завантаження...
-      </span>
-    </button>
-    <button class="btn btn-outline-secondary"
-            type="button"
-            (click)="cancel()"
-            [disabled]="isUploading">
-      Скасувати
-    </button>
-  </div>
-</form>
+  </form>
+</section>

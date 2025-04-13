@@ -20,6 +20,8 @@ export class AddAnimalComponent {
 
   public uploader: FileUploader;
   public hasBaseDropZoneOver: boolean = false;
+  animalTypes: string[] = ['Кіт', 'Собака', 'Гризун', 'Птах', 'Інше'];
+  cities: string[] = ['Київ', 'Львів', 'Харків', 'Одеса', 'Дніпро', 'Запоріжжя', 'Інше'];
 
   constructor(
     private animalService: AnimalsService,
@@ -48,11 +50,12 @@ export class AddAnimalComponent {
 
   initForm() {
     this.registerForm = this.fb.group({
-      name: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(24)]],
-      description: [''],
-      species: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(24)]],
-      age: ['', [Validators.required]],
-      health: ['', [Validators.required]],
+      species: ['', Validators.required],
+      city: ['', Validators.required],
+      age: ['', [Validators.required, Validators.min(1), Validators.max(99)]],
+      name: ['', Validators.maxLength(24)],
+      health: ['', Validators.maxLength(24)],
+      description: ['', Validators.maxLength(100)]
     });
   }
 
