@@ -1,6 +1,6 @@
 <app-header></app-header>
 <nav class="main-nav">
-  <ul class="flex flex-row space-x-6 absolute">
+  <ul class="flex flex-row space-x-6 absolute hidden">
     <!-- Посилання для притулків -->
     <li><a routerLink="/add-animal" routerLinkActive="active">Додати тварину</a></li>
     <li><a routerLink="/animals" routerLinkActive="active">Усі тварини</a></li>
@@ -22,20 +22,3 @@
 <router-outlet></router-outlet>
 
 <app-footer></app-footer>
-
-<script>
-  function togglePassword() {
-    const passwordInput = document.getElementById('password');
-    const toggleIcon = document.getElementById('toggleIcon');
-
-    if (passwordInput.getAttribute('type') === 'password') {
-      passwordInput.setAttribute('type', 'text');
-      toggleIcon.src = './assets/img/icons/close-eye.png';
-      toggleIcon.className = 'h-[18px] w-[18px]';
-    } else {
-      passwordInput.setAttribute('type', 'password');
-      toggleIcon.src = './assets/img/icons/eye.png';
-      toggleIcon.className = 'h-4 w-4';
-    }
-  }
-</script>

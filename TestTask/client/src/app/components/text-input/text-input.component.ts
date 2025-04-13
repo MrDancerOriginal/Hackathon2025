@@ -9,6 +9,7 @@ import { NgControl, FormControl } from '@angular/forms';
 export class TextInputComponent {
   @Input() label = '';
   @Input() type = 'text';
+  @Input() isPassword = 'bool';
 
   constructor(@Self() public ngControl: NgControl) {
     this.ngControl.valueAccessor = this;
@@ -25,5 +26,17 @@ export class TextInputComponent {
 
   get control(): FormControl {
     return this.ngControl.control as FormControl;
+  }
+
+  togglePassword(icon: HTMLImageElement): void {
+    if (this.type === 'password') {
+      this.type = 'text';
+      icon.src = 'icons/eye.png';
+      icon.className = 'h-[18px] w-[18px]';
+    } else {
+      this.type = 'password';
+      icon.src = 'icons/close-eye.png';
+      icon.className = 'h-4 w-4';
+    }
   }
 }

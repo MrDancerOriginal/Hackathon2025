@@ -1,4 +1,4 @@
-<div class="mb-3">
+<!-- <div class="mb-3">
   <input
     [type]="type"
     class="form-control"
@@ -20,6 +20,46 @@
   </div>
 
   <div class="invalid-feedback" *ngIf="control.errors?.['notMatching']">
+    Паролі не співпадають
+  </div>
+</div> -->
+
+<div class="mb-4 flex flex-col">
+  <label *ngIf="label" class="indent-4 text-sm font-normal mb-1">
+    {{ label }}
+  </label>
+
+  <!-- Input + Eye icon wrapper -->
+  <div class="relative">
+    <input
+      [type]= "type"
+      class="w-full rounded-2xl border border-[#4A2C2A] bg-[#F6EBEA] px-6 py-3 pr-10 focus:outline-none placeholder:text-[#4A2C2A] placeholder:text-opacity-50"
+      [class.border-red-500]="control.touched && control.invalid"
+      [formControl]="control"
+      [placeholder]="label"
+    />
+
+    <!-- Eye icon inside input -->
+    <figure
+      *ngIf="isPassword == 'true'"
+      class="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer"
+      (click)="togglePassword(icon)"
+    >
+      <img #icon src="icons/close-eye.png" alt="" class="h-4 w-4" />
+    </figure>
+  </div>
+
+  <!-- Validation messages -->
+  <div class="text-red-500 text-sm mt-1" *ngIf="control.errors?.['required'] && control.touched">
+    {{ label }} це обов'язкове поле!
+  </div>
+  <div class="text-red-500 text-sm mt-1" *ngIf="control.errors?.['minlength'] && control.touched">
+    {{ label }} має містити щонайменше {{ control.errors?.['minlength'].requiredLength }} символів
+  </div>
+  <div class="text-red-500 text-sm mt-1" *ngIf="control.errors?.['maxlength'] && control.touched">
+    {{ label }} має містити не більше ніж {{ control.errors?.['maxlength'].requiredLength }} символів
+  </div>
+  <div class="text-red-500 text-sm mt-1" *ngIf="control.errors?.['notMatching'] && control.touched">
     Паролі не співпадають
   </div>
 </div>

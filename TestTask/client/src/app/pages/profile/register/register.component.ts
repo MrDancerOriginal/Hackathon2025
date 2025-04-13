@@ -13,7 +13,7 @@ import { ShelterCategory } from '../../../enums/shelter-category.interface';
 })
 export class RegisterComponent {
   registerForm: FormGroup;
-  roles = ['Shelter', 'Volunteer'];
+  roles = ['Організація', 'Волонтер'];
   shelterCategories = [
     "Ветклініка",
     "Притулок для собак та котів",
@@ -50,7 +50,7 @@ export class RegisterComponent {
   }
 
   private updateFormValidation(): void {
-    const isShelter = this.registerForm.get('role')?.value === 'Shelter';
+    const isShelter = this.registerForm.get('role')?.value === 'Організація';
 
     // Common fields
     const locationControl = this.registerForm.get('location');
@@ -115,6 +115,29 @@ export class RegisterComponent {
         next: (response) => {
           if (response.result && response.token && response.id) {
             this.authService.storeToken(response.token, response.id);
+
+            // Якщо це Shelter - реєструємо притулок
+            if (this.registerForm.get('role')?.value === 'Організація') {
+              const shelterData = {
+                name: this.registerForm.get('name')?.value,
+                address: this.registerForm.get('address')?.value,
+                phone: this.registerForm.get('phoneNumber')?.value,
+                category: this.registerForm.get('category')?.value
+              };
+
+              this.shelterService.addShelter(shelterData).subscribe({
+                next: (shelterResponse) => {
+                  console.log('Shelter registered successfully', shelterResponse);
+                  this.router.navigate(['']); // Перенаправлення після успішної реєстрації
+                },
+                error: (shelterError) => {
+                  console.error('Shelter registration failed', shelterError);
+                  this.errorMessages = shelterError.error?.errors || ['Shelter registration failed'];
+                }
+              });
+            } else {
+              this.router.navigate(['']); // Перенаправлення для Volunteer
+            }
             this.router.navigate(['']);
           } else if (response.errors) {
             this.errorMessages = response.errors;
