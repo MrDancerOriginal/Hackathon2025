@@ -101,7 +101,7 @@ namespace ShelterService.Controllers
                             Name = requestDto.ShelterName,
                             Address = requestDto.Address,
                             Phone = requestDto.Phone,
-                            Category = requestDto.Category ?? ShelterCategory.DogCatShelter
+                            Category = requestDto.Category
                         };
                         _context.Shelters.Add(shelter);
                     }
