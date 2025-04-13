@@ -11,6 +11,22 @@
 <body>
   <app-root></app-root>
 </body>
+<script>
+  function togglePassword() {
+    const passwordInput = document.getElementById('password');
+    const toggleIcon = document.getElementById('toggleIcon');
+
+    if (passwordInput.getAttribute('type') === 'password') {
+      passwordInput.setAttribute('type', 'text');
+      toggleIcon.src = './assets/img/icons/close-eye.png';
+      toggleIcon.className = 'h-[18px] w-[18px]';
+    } else {
+      passwordInput.setAttribute('type', 'password');
+      toggleIcon.src = './assets/img/icons/eye.png';
+      toggleIcon.className = 'h-4 w-4';
+    }
+  }
+</script>
 </html>
 
 <!-- ьуьуьу -->

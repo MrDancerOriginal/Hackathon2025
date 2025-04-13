@@ -54,4 +54,17 @@ export class LoginComponent {
       });
     }
   }
+  togglePassword(): void {
+    const input: any = document.getElementById('password');
+    const icon: any = document.getElementById('toggleIcon');
+    if (input.type === 'password') {
+      input.type = 'text';
+      icon.src = 'icons/close-eye.png';
+      icon.className = 'h-[18px] w-[18px]';
+    } else {
+      input.type = 'password';
+      icon.src = 'icons/eye.png';
+      icon.className = 'h-4 w-4';
+    }
+  }
 }
