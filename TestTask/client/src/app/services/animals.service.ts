@@ -23,10 +23,6 @@ export class AnimalsService {
     return this.http.post<Animal>(this.baseUrl + 'animals', model);
   }
 
-  updateAnimal(model: any, id: number) {
-    return this.http.put<Animal>(this.baseUrl + `animals/${id}`, model);
-  }
-
   getAnimals(){
     return this.http.get<Animal[]>(this.baseUrl + 'animals');
   }

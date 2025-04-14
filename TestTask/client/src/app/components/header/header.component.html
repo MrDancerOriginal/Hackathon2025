@@ -1,72 +1,86 @@
 <header>
-    <div class="relative mx-auto my-5 max-w-[1290px]">
-      <div class="flex w-full items-center justify-between">
-        <figure>
-          <img class="w-[185px]" src="/logo.png" alt="logo" />
-        </figure>
-        <nav class="text-brown">
-          <ul class="flex items-center gap-6">
-            <li><a routerLink="/animals" class="text-xl">Знайти улюбленця</a></li>
-            <li><a routerLink="/shelters" class="text-xl">Притулки</a></li>
-            <li><a href="#" class="text-xl">Pet Stories</a></li>
-          </ul>
-        </nav>
+  <div class="relative mx-auto my-5 max-w-[1290px]">
+    <div class="flex w-full items-center justify-between">
+      <figure>
+        <img class="w-[185px]" src="/logo.png" alt="logo" />
+      </figure>
 
-        <div class="relative z-20 flex flex-row items-center space-x-6">
-          <ng-container *ngIf="isLoggedIn() === false; else profileLink">
-            <a routerLink="/login" class="text-brown text-xl mr-sm text-center block">Увійти</a>
-            <a
-              routerLink="/register"
-              class="bg-[#4A2C2A] hover:bg-brown-hover rounded-full px-14 py-3 text-[#FFF9F7] transition duration-300 ease-in-out text-xl block">
-              Реєстрація
+      <!-- Desktop Navigation -->
+      <nav class="hidden text-brown lg:block">
+        <ul class="flex items-center gap-6">
+          <li *ngIf="role === 'Volunteer'"><a routerLink="/animals" class="text-xl">Знайти улюбленця</a></li>
+          <li *ngIf="role === 'Volunteer'"><a routerLink="/shelters" class="text-xl">Притулки</a></li>
+          <li><a href="#" class="text-xl">Pet Stories</a></li>
+        </ul>
+      </nav>
+
+      <div class="relative z-20 flex flex-row items-center space-x-6">
+        <ng-container *ngIf="!isLoggedIn; else profileLink">
+          <a routerLink="/login" class="text-brown text-xl mr-sm text-center block">Увійти</a>
+          <a routerLink="/register" class="bg-[#4A2C2A] hover:bg-brown-hover rounded-full px-14 py-3 text-[#FFF9F7] transition duration-300 ease-in-out text-xl block">
+            Реєстрація
+          </a>
+        </ng-container>
+
+        <ng-template #profileLink>
+          <div class="relative z-20 hidden items-center gap-6 lg:flex">
+            <a routerLink="/profile" class="flex items-center gap-2 text-[#4A2C2A]">
+              <img class="h-8 w-8" src="icons/user.png" alt="" />
+              <span>Мій Профіль</span>
             </a>
-          </ng-container>
+            <a routerLink="add-animal" class="rounded-full bg-[#4A2C2A] px-5 py-4 text-[#FFF9F7] transition duration-300 ease-in-out hover:bg-[#3D2523]" *ngIf="role === 'Shelter'">
+              Створити оголошення
+            </a>
+          </div>
 
-          <ng-template #profileLink>
-            <div class="relative z-20 hidden items-center gap-6 lg:flex">
-              <a routerLink="/profile" class="flex items-center gap-2 text-[#4A2C2A]">
-                <img class="h-8 w-8" src="icons/user.png" alt="" />
-                <span>Мій Профіль</span>
-              </a>
-              <a
-                routerLink="add-animal"
-                class="rounded-full bg-[#4A2C2A] px-5 py-4 text-[#FFF9F7] transition duration-300 ease-in-out hover:bg-[#3D2523]"
-              >
-                Створити оголошення
-              </a>
-            </div>
-
-            <button id="open-btn" class="relative z-20 mr-5 block lg:hidden">
-              <figure>
-                <img class="h-10 w-10" src="icons/burger.png" alt="" />
-              </figure>
-            </button>
-          </ng-template>
-        </div>
-
-
-      <div class="relative z-20 hidden items-center gap-6 lg:flex">
-        <a href="profile" class="flex items-center gap-2 text-[#4A2C2A]">
-          <img class="h-8 w-8" src="icons/user.png" alt="" />
-          <span>Мій Профіль</span>
-          <img class="h-4 w-4" src="icons/down.png" alt="" />
-        </a>
-        <a
-          href="add-animal"
-          class="rounded-full bg-[#4A2C2A] px-5 py-4 text-[#FFF9F7] transition duration-300 ease-in-out hover:bg-[#3D2523]"
-        >
-          Створити оголошення
-        </a>
+          <!-- Burger Button (Mobile) -->
+          <button (click)="toggleMobileMenu()" class="relative z-20 mr-5 block lg:hidden burger">
+            <figure>
+              <img class="h-10 w-10" src="icons/burger.png" alt="Меню" />
+            </figure>
+          </button>
+        </ng-template>
       </div>
-
-      <button id="open-btn" class="relative z-20 mr-5 block lg:hidden">
-        <figure>
-          <img class="h-10 w-10" (click)="openMenu.emit()" #openBtn src="icons/burger.png" alt="" />
-        </figure>
-      </button>
     </div>
   </div>
   <figure class="absolute right-0 top-0 h-auto w-[200px]">
     <img src="bg/trace/trace-1.png" alt="" />
   </figure>
 </header>
+
+<!-- Mobile Menu -->
+<div #menu
+  class="fixed bottom-0 left-0 right-0 top-0 z-30 h-screen w-full flex-col items-center bg-[#FFF9F7] px-6 transition-all duration-700 ease-in-out translate-x-full opacity-0 pointer-events-none">
+  <button (click)="toggleMobileMenu()" #closeBtn class="absolute right-6 top-6 cursor-pointer">
+    <figure>
+      <img class="h-8 w-8" src="icons/close.png" alt="Закрити меню" />
+    </figure>
+  </button>
+
+  <nav class="w-full max-w-[400px] text-[#4A2C2A]">
+    <ul class="flex h-screen flex-col items-center justify-center gap-8">
+      <li><a routerLink="/" (click)="closeMobileMenu()" class="text-xl">Головна</a></li>
+      <li *ngIf="role === 'Volunteer'"><a routerLink="/animals" (click)="closeMobileMenu()" class="text-xl">Знайти улюбленця</a></li>
+      <li *ngIf="role === 'Volunteer'"><a routerLink="/shelters" (click)="closeMobileMenu()" class="text-xl">Притулки</a></li>
+      <li><a href="#" (click)="closeMobileMenu()" class="text-xl">Pet Stories</a></li>
+
+      <ng-container *ngIf="!isLoggedIn; else mobileProfileLink">
+        <li><a routerLink="/login" (click)="closeMobileMenu()" class="text-xl">Увійти</a></li>
+      </ng-container>
+
+      <ng-template #mobileProfileLink>
+        <li>
+          <a routerLink="/profile" (click)="closeMobileMenu()" class="flex items-center gap-2 text-xl">
+            <img class="h-8 w-8" src="icons/user.png" alt="" />
+            <span>Мій Профіль</span>
+          </a>
+        </li>
+        <li *ngIf="role === 'Shelter'" class="mt-8 flex justify-center">
+          <a routerLink="add-animal" (click)="closeMobileMenu()" class="absolute bottom-[32px] inline-block rounded-full bg-[#4A2C2A] px-5 py-4 text-[#FFF9F7] transition duration-300 ease-in-out hover:bg-[#3D2523]">
+            Створити оголошення
+          </a>
+        </li>
+      </ng-template>
+    </ul>
+  </nav>
+</div>

@@ -32,7 +32,6 @@
         <!-- Age and Name -->
         <div class="flex flex-col gap-4 sm:flex-row sm:gap-8">
           <div class="w-full sm:w-[32%]">
-            <span class="ml-4 text-sm font-normal">Введіть вік цифрами</span>
             <app-text-input
               [formControl]="$any(registerForm.controls['age'])"
               [label]="'Введіть вік цифрами'"
@@ -42,14 +41,12 @@
             ></app-text-input>
           </div>
           <div class="w-full sm:w-[68%]">
-            <span class="ml-4 text-sm font-normal">Введіть кличку за наявності</span>
             <app-text-input [formControl]="$any(registerForm.controls['name'])" [label]="'Введіть кличку за наявності'" [iPlaceholder]="'Масяня'"></app-text-input>
           </div>
         </div>
 
 
         <div class="w-full sm:w-[100%]">
-          <span class="ml-4 text-sm font-normal">Опишіть стан здоровʼя (максимум 24 символи)</span>
         <!-- Health -->
         <app-text-input
           [formControl]="$any(registerForm.controls['health'])"

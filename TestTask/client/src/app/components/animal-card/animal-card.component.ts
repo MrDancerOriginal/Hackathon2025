@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Animal } from '../../models/animal.interface';
 import { AnimalsService } from '../../services/animals.service';
+import { environment } from '../../../environment/environment';
 
 @Component({
   selector: 'app-animal-card',
@@ -8,10 +9,15 @@ import { AnimalsService } from '../../services/animals.service';
   styleUrl: './animal-card.component.scss'
 })
 export class AnimalCardComponent implements OnInit {
+
+  public url = 'https://localhost:7077/';
+
   ngOnInit(): void {
-    console.log(this.animal)
   }
 
+  normalizePath(path: string): string {
+    return path.replace(/\\/g, '/');
+  }
 
   constructor(private animalService : AnimalsService) {
 
@@ -33,5 +39,8 @@ export class AnimalCardComponent implements OnInit {
       }})
   }
 
-
+  handleImageError(event: any) {
+    event.target.style.display = 'none'; // Hide broken image
+    // Or you could set a flag to show the placeholder instead
+  }
 }

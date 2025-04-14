@@ -30,7 +30,6 @@ import { ProfileComponent } from './pages/profile/profile/profile.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { FavListComponent } from './components/fav-list/fav-list.component';
-import { MobileMenuComponent } from './components/mobile-menu/mobile-menu.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +52,6 @@ import { MobileMenuComponent } from './components/mobile-menu/mobile-menu.compon
     HeaderComponent,
     FooterComponent,
     FavListComponent,
-    MobileMenuComponent,
   ],
   imports: [
     BrowserModule,
