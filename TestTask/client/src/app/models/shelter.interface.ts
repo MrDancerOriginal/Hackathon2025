@@ -8,5 +8,7 @@ export interface Shelter {
   phone: string;
   category: string;
   announcements?: Animal[];
+  photo?: string;
+  userId: string;
   // requests?: Request[]; // Uncomment if Request model is available
 }

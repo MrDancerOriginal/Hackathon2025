@@ -10,12 +10,12 @@
         <ul class="flex items-center gap-6">
           <li *ngIf="role === 'Volunteer'"><a routerLink="/animals" class="text-xl">Знайти улюбленця</a></li>
           <li *ngIf="role === 'Volunteer'"><a routerLink="/shelters" class="text-xl">Притулки</a></li>
-          <li><a href="#" class="text-xl">Pet Stories</a></li>
+          <li><a routerLink="/pet-store" class="text-xl">Pet Stories</a></li>
         </ul>
       </nav>
 
       <div class="relative z-20 flex flex-row items-center space-x-6">
-        <ng-container *ngIf="!isLoggedIn; else profileLink">
+        <ng-container *ngIf="!isLoggedIn(); else profileLink">
           <a routerLink="/login" class="text-brown text-xl mr-sm text-center block">Увійти</a>
           <a routerLink="/register" class="bg-[#4A2C2A] hover:bg-brown-hover rounded-full px-14 py-3 text-[#FFF9F7] transition duration-300 ease-in-out text-xl block">
             Реєстрація

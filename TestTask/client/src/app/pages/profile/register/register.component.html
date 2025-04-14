@@ -45,6 +45,7 @@
       <div *ngIf="registerForm.get('role')?.value === 'Волонтер'">
         <app-text-input [formControl]="$any(registerForm.controls['fullName'])" [label]="'Повне ім\'я'"></app-text-input>
         <app-text-input [formControl]="$any(registerForm.controls['email'])" [label]="'E-mail'"></app-text-input>
+        <app-text-input [formControl]="$any(registerForm.controls['location'])" [label]="'Місцезнаходження'"></app-text-input>
         <app-text-input [formControl]="$any(registerForm.controls['password'])" [label]="'Пароль'" [type]="'password'" [isPassword]="'true'"></app-text-input>
         <!-- <p class="mt-1 text-sm text-opacity-50"> Пароль повинен містити 8 символів, цифри, великі та малі літери </p> -->
         <app-text-input [formControl]="$any(registerForm.controls['phone'])" [label]="'Номер телефону'"></app-text-input>

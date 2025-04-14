@@ -18,6 +18,7 @@ import { RegisterComponent } from './pages/profile/register/register.component';
 import { LoginComponent } from './pages/profile/login/login.component';
 import { ProfileComponent } from './pages/profile/profile/profile.component';
 import { authGuard } from './guards/auth.guard';
+import { PetStoreComponent } from './pages/pet-store/pet-store.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' }, // Додано перенаправлення для порожнього шляху
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'home', component: HomeComponent },
+  { path: 'pet-store', component: PetStoreComponent},
   {
     path: '',
     runGuardsAndResolvers: 'always',

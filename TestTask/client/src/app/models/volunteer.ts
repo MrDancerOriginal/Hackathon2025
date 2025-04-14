@@ -4,6 +4,7 @@ export interface Volunteer {
   volunteerId: number;
   userId: string;
   name: string;
+  photo?: string;
   phone?: string;
   interests?: string;
   location?: string;

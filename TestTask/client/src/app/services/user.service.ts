@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, forkJoin, map, of, throwError } from 'rxjs';
 import { environment } from '../../environment/environment';
@@ -59,6 +59,30 @@ export class UserService {
   isVolunteer(): Observable<boolean> {
     return this.getCurrentUserRole().pipe(
       map(role => role === 'Volunteer')
+    );
+  }
+
+
+
+  updateShelter(shelterId: string, data: any): Observable<Shelter> {
+    console.log(data)
+    return this.http.put<Shelter>(`${this.apiUrl}Shelters/byUserId/${shelterId}`, data,
+      {
+        headers: new HttpHeaders({
+          'Accept': 'application/json' // Important for some APIs
+        })
+      });
+  }
+
+  updateVolunteer(userId: string, data: any): Observable<Volunteer> {
+    return this.http.put<Volunteer>(
+      `${this.apiUrl}Volunteers/byUserId/${userId}`,
+      data,
+      {
+        headers: new HttpHeaders({
+          'Accept': 'application/json' // Important for some APIs
+        })
+      }
     );
   }
 }

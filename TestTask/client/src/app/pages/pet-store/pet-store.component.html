@@ -1,0 +1,39 @@
+<div class="container mx-auto px-4 space-y-12 max-w-6xl">
+  <!-- Заголовок з лапками -->
+  <div class="flex items-center justify-center gap-4 mb-[20px]">
+      <figure class="h-8 w-8"><img src="icons/paw.png" alt="" /></figure>
+      <h1 class="text-2xl font-bold text-brown">Як це працює?</h1>
+      <figure class="h-8 w-8"><img src="icons/paw.png" alt="" /></figure>
+  </div>
+
+  <!-- Контейнер для відео карток-->
+  <div class="flex flex-wrap justify-center gap-6">
+    <div class="w-full sm:w-[calc(50%-12px)] lg:w-[calc(25%-18px)] min-w-[280px] max-w-[400px] overflow-hidden shadow-lg bg-opacity-0">
+      <!-- Відеоплеєр -->
+      <div class="relative pt-[65.0%] bg-[#4A2C2A] bg-opacity-20 rounded-xl"> <!-- 16:9 aspect ratio -->
+        <iframe
+          class="absolute top-0 left-0 w-full h-full"
+          [src]=""
+          frameborder="0"
+          allowfullscreen>
+        </iframe>
+      </div>
+
+      <!-- Нижня частина картки -->
+      <div class="p-4 flex justify-between items-center">
+        <span class="text-lg font-medium bg-opacity-0 text-gray-800 truncate max-w-[70%]">
+          Імʼя
+        </span>
+        <button
+          class="p-2 focus:outline-none w-[20%]">
+          <img src="icons/like.png" class="">
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- *ngFor="let video of videos"
+[videoData]="video" -->
+<!-- (likeToggled)="onLikeToggle($event)"  -->
+
