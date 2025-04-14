@@ -7,6 +7,7 @@ namespace ShelterService.Models.Entities
         public int VolunteerId { get; set; } 
         public string UserId { get; set; }
         public string Name { get; set; }
+        public string? Photo { get; set; }
         public string? Phone { get; set; }
         /// <summary>
         /// Можливі інтереси або напрямки допомоги (напр. робота з собаками, котами, пошук фінансів тощо).

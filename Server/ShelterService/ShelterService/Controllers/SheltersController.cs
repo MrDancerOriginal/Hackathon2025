@@ -95,5 +95,37 @@ namespace ShelterService.Controllers
 
             return Ok(likedAnimals);
         }
+
+        [HttpPut("{userId}")]
+        public async Task<IActionResult> UpdateShelter(string userId, [FromForm] ShelterUpdateDto dto)
+        {
+            var shelter = await _context.Shelters.FirstOrDefaultAsync(s => s.UserId == userId);
+            if (shelter == null)
+                return NotFound();
+
+            shelter.Name = dto.Name;
+            shelter.Address = dto.Address;
+            shelter.Phone = dto.Phone;
+            shelter.Category = dto.Category;
+
+            if (dto.Photo != null)
+            {
+                var uploadsFolder = Path.Combine("wwwroot", "images", "shelters");
+                Directory.CreateDirectory(uploadsFolder); // якщо ще не існує
+                var fileName = Guid.NewGuid().ToString() + Path.GetExtension(dto.Photo.FileName);
+                var filePath = Path.Combine(uploadsFolder, fileName);
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await dto.Photo.CopyToAsync(stream);
+                }
+
+                shelter.Photo = $"/images/shelters/{fileName}";
+            }
+
+            await _context.SaveChangesAsync();
+
+            return Ok(shelter);
+        }
     }
 }

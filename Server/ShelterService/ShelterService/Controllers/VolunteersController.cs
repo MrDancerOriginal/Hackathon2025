@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ShelterService.Data;
+using ShelterService.Models.DTOs;
 using ShelterService.Models.Entities;
 
 namespace ShelterService.Controllers
@@ -108,6 +109,40 @@ namespace ShelterService.Controllers
             await _context.SaveChangesAsync();
 
             return NoContent();
+        }
+
+        [HttpPut("byUserId/{userId}")]
+        public async Task<IActionResult> UpdateVolunteerByUserId(string userId, [FromForm] VolunteerUpdateDto dto)
+        {
+            var volunteer = await _context.Volunteers.FirstOrDefaultAsync(v => v.UserId == userId);
+            if (volunteer == null)
+                return NotFound(new { message = "Volunteer not found" });
+
+            if (dto.Name != null)
+                volunteer.Name = dto.Name;
+            volunteer.Phone = dto.Phone;
+            volunteer.Interests = dto.Interests;
+            volunteer.Location = dto.Location;
+
+            if (dto.Photo != null)
+            {
+                var uploadsFolder = Path.Combine("wwwroot", "images", "volunteers");
+                Directory.CreateDirectory(uploadsFolder);
+
+                var fileName = Guid.NewGuid().ToString() + Path.GetExtension(dto.Photo.FileName);
+                var filePath = Path.Combine(uploadsFolder, fileName);
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await dto.Photo.CopyToAsync(stream);
+                }
+
+                volunteer.Photo = $"/images/volunteers/{fileName}";
+            }
+
+            await _context.SaveChangesAsync();
+
+            return Ok(volunteer);
         }
     }
 }

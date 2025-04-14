@@ -12,8 +12,8 @@ using ShelterService.Data;
 namespace ShelterService.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250413150021_UpdateAddAnimal")]
-    partial class UpdateAddAnimal
+    [Migration("20250414142032_AddPhotoToVolunteer")]
+    partial class AddPhotoToVolunteer
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -375,6 +375,9 @@ namespace ShelterService.Migrations
                     b.Property<string>("Phone")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Photo")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -403,6 +406,9 @@ namespace ShelterService.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Phone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Photo")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")

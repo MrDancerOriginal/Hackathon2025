@@ -12,8 +12,8 @@ using ShelterService.Data;
 namespace ShelterService.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250413133501_ChangeIntToString")]
-    partial class ChangeIntToString
+    [Migration("20250414134041_AddPhotoToShelter")]
+    partial class AddPhotoToShelter
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -243,20 +243,20 @@ namespace ShelterService.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ShelterId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("ShelterId1")
+                    b.Property<int?>("ShelterId")
                         .HasColumnType("int");
 
                     b.Property<string>("Species")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("ShelterId1");
+                    b.HasIndex("ShelterId");
 
                     b.ToTable("Animals");
                 });
@@ -375,6 +375,9 @@ namespace ShelterService.Migrations
                     b.Property<string>("Phone")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Photo")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -469,7 +472,7 @@ namespace ShelterService.Migrations
                 {
                     b.HasOne("ShelterService.Models.Entities.Shelter", null)
                         .WithMany("Announcements")
-                        .HasForeignKey("ShelterId1");
+                        .HasForeignKey("ShelterId");
                 });
 
             modelBuilder.Entity("ShelterService.Models.Entities.AnimalImage", b =>
