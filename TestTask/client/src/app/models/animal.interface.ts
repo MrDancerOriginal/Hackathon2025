@@ -5,4 +5,5 @@ export interface Animal {
   species: string | null;
   age: number | null;
   health: string | null;
+  mainImagePath : string | null;
 }

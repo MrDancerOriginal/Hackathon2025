@@ -36,7 +36,7 @@
         <app-text-input [formControl]="$any(registerForm.controls['shelterName'])" [label]="'Назва закладу'" class="block"></app-text-input>
         <app-text-input [formControl]="$any(registerForm.controls['email'])" [label]="'E-mail'"></app-text-input>
         <app-text-input [formControl]="$any(registerForm.controls['password'])" [label]="'Пароль'" [type]="'password'" [isPassword]="'true'"></app-text-input>
-        <!-- <app-text-input [formControl]="$any(registerForm.controls['location'])" [label]="'Місцезнаходження'"></app-text-input> -->
+        <app-text-input [formControl]="$any(registerForm.controls['location'])" [label]="'Місцезнаходження'"></app-text-input>
         <app-text-input [formControl]="$any(registerForm.controls['address'])" [label]="'Адреса'"></app-text-input>
         <app-text-input [formControl]="$any(registerForm.controls['phone'])" [label]="'Номер телефону'"></app-text-input>
       </div>
@@ -48,7 +48,7 @@
         <app-text-input [formControl]="$any(registerForm.controls['password'])" [label]="'Пароль'" [type]="'password'" [isPassword]="'true'"></app-text-input>
         <!-- <p class="mt-1 text-sm text-opacity-50"> Пароль повинен містити 8 символів, цифри, великі та малі літери </p> -->
         <app-text-input [formControl]="$any(registerForm.controls['phone'])" [label]="'Номер телефону'"></app-text-input>
-        <app-text-input [formControl]="$any(registerForm.controls['location'])" [label]="'Місцезнаходження'"></app-text-input>
+
       </div>
 
       <div *ngIf="errorMessages.length > 0" class="alert alert-danger text-sm mt-4">
@@ -60,6 +60,10 @@
       <button type="submit" class="mt-6 w-full rounded-2xl bg-[#4A2C2A] py-[10px] text-white transition duration-300 ease-in-out hover:bg-[#3D2523]" [disabled]="registerForm.invalid">
         Зареєструватись
       </button>
+
+      <pre>{{ registerForm.value | json }}</pre>
+<p>Form valid: {{ registerForm.valid }}</p>
+<p>Form errors: {{ registerForm.errors | json }}</p>
     </form>
 
     <div class="mt-8 h-[1px] w-full bg-[#4A2C2A] bg-opacity-[20%]"></div>

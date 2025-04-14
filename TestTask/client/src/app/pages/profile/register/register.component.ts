@@ -94,14 +94,16 @@ export class RegisterComponent {
     if (this.registerForm.valid) {
       const formValue = this.registerForm.value;
 
+      const roleTranslate = formValue.role === "Організація"? "Shelter" : "Volunteer";
+
       // Prepare the data exactly as backend expects
       const requestData: UserRegistrationRequestDto = {
-        role: formValue.role,
+        role: roleTranslate,
         email: formValue.email,
         password: formValue.password,
         location: formValue.location,
         phone: formValue.phone,
-        ...(formValue.role === 'Shelter' ? {
+        ...(formValue.role === 'Організація' ? {
           shelterName: formValue.shelterName,
           address: formValue.address,
           category: formValue.category

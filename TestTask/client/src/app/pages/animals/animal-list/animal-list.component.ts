@@ -9,7 +9,7 @@ import { AnimalsService } from '../../../services/animals.service';
   styleUrl: './animal-list.component.scss'
 })
 export class AnimalListComponent {
-  @Input() inputAnimals : Animal[] = [];
+  @Input() inputAnimals : Animal[] = undefined;
   @Input() isAuthor = false;
   animals: Animal[] = [];
   filteredAnimals: Animal[] = [];
@@ -29,7 +29,7 @@ export class AnimalListComponent {
 
   ngOnInit(): void {
 
-    if(this.inputAnimals.length === 0){
+    if(this.inputAnimals === undefined){
       this.loadMembers();
     }else{
       this.animals = this.inputAnimals;

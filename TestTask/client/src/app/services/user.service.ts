@@ -42,4 +42,23 @@ export class UserService {
       })
     );
   }
+
+  getCurrentUserRole(): Observable<string> {
+    return this.getUserInfo().pipe(
+      map(userInfo => userInfo.role),
+      catchError(() => of('Unknown')) // Return 'Unknown' if there's an error
+    );
+  }
+
+  isShelter(): Observable<boolean> {
+    return this.getCurrentUserRole().pipe(
+      map(role => role === 'Shelter')
+    );
+  }
+
+  isVolunteer(): Observable<boolean> {
+    return this.getCurrentUserRole().pipe(
+      map(role => role === 'Volunteer')
+    );
+  }
 }

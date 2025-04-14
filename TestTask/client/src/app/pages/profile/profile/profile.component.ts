@@ -3,6 +3,7 @@ import { Shelter } from '../../../models/shelter.interface';
 import { AuthService } from '../../../services/auth.service';
 import { UserService } from '../../../services/user.service';
 import { Volunteer } from '../../../models/volunteer';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -17,7 +18,8 @@ export class ProfileComponent {
 
   constructor(
     private userService: UserService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -31,6 +33,7 @@ export class ProfileComponent {
         this.userRole = result.role;
         if (result.role === 'Shelter') {
           this.shelterData = result.data as Shelter;
+          console.log(result.data)
         } else if (result.role === 'Volunteer') {
           this.volunteerData = result.data as Volunteer;
         }
@@ -45,6 +48,7 @@ export class ProfileComponent {
 
   logout(): void {
     this.authService.logout();
+    this.router.navigate(['/']);
     // Redirect to login or home page
   }
 }
