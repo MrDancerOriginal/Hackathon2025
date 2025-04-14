@@ -78,6 +78,8 @@ app.UseStaticFiles();
 
 app.UseHttpsRedirection();
 
+app.UseStaticFiles();
+
 app.UseCors("AllowAngularApp");
 
 app.UseAuthentication();
