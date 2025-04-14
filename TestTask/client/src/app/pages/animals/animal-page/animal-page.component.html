@@ -9,9 +9,18 @@
   <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
     <!-- Animal image section -->
     <div class="rounded-2xl overflow-hidden shadow-lg bg-[#F6EBEA] h-96 flex items-center justify-center">
-      <svg class="w-32 h-32 text-[#D4A59A]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21"></path>
-      </svg>
+      <ng-container *ngIf="animal.images?.length > 0; else defaultIcon">
+        <!-- Display first image from array -->
+        <img [src]="getImageUrl(animal.images[0].imagePath)"
+             alt="{{animal.name || 'Тварина'}}"
+             class="w-full h-full object-cover"
+             (error)="handleImageError($event)">
+      </ng-container>
+      <ng-template #defaultIcon>
+        <svg class="w-32 h-32 text-[#D4A59A]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21"></path>
+        </svg>
+      </ng-template>
     </div>
 
     <!-- Animal details section -->
@@ -71,6 +80,21 @@
           </svg>
           В улюблені
         </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Image gallery -->
+  <div *ngIf="animal.images?.length > 1" class="mt-12">
+    <h2 class="text-2xl font-semibold text-[#4A2C2A] mb-6 text-center">Галерея зображень</h2>
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+      <div *ngFor="let image of animal.images" class="group relative rounded-lg overflow-hidden shadow-md h-48 cursor-pointer">
+        <img [src]="getImageUrl(image.imagePath)"
+             alt="{{animal.name || 'Тварина'}}"
+             class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+             (error)="handleImageError($event)"
+             (click)="openImageModal(getImageUrl(image.imagePath))">
+        <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300"></div>
       </div>
     </div>
   </div>

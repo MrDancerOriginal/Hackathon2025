@@ -24,9 +24,11 @@ export class AnimalCardComponent implements OnInit {
 
   }
 
-  @Input() animal: Animal | undefined;
+  @Input() animal: any | undefined;
 
   @Input() isAuthor = false;
+
+
 
   onDelete() {
     this.animalService.deleteAnimal(this.animal.id).subscribe({

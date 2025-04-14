@@ -32,6 +32,21 @@ export class AnimalPageComponent implements OnInit {
     });
   }
 
+  getImageUrl(imagePath: string): string {
+    // Замінюємо зворотні слеші на прямі для URL
+    const normalizedPath = imagePath.replace(/\\/g, '/');
+
+    // Формуємо повний URL до зображення
+    return `https://localhost:7077/${normalizedPath}`;
+  }
+
+  openImageModal(imageUrl: string) {
+    // Тут можна реалізувати відкриття модального вікна з великим зображенням
+    // Наприклад, використовуючи Angular Material Dialog або іншу бібліотеку
+    console.log('Open image:', imageUrl);
+    // Реалізація залежить від вашої бібліотеки модальних вікон
+  }
+
   addLike(animal : Animal){
     this.animalService.addLike(animal.id, this.authService.getUserId()).subscribe({
       next: () => this.toastr.success('Ви відгукнулись на ' + animal.name)
@@ -40,5 +55,11 @@ export class AnimalPageComponent implements OnInit {
 
   addFav(animal: Animal){
     this.animalService.addFavorite(animal);
+  }
+
+  handleImageError(event: any) {
+    // Обробка помилок завантаження зображення
+    event.target.src = 'assets/default-animal-image.jpg';
+    event.target.onerror = null; // Запобігаємо нескінченному циклу помилок
   }
 }
