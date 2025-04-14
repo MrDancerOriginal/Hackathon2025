@@ -1,52 +1,57 @@
-<footer class="relative z-10 mx-auto mt-[100px] w-full rounded-t-3xl bg-[#4A2C2A] px-[73px] py-16">
-    <div class="flex items-start justify-between text-white">
-      <div>
-        <figure>
-          <img class="w-[190px]" src="/logo-white.png" alt="" />
-        </figure>
-        <div class="mt-8 font-normal leading-relaxed text-white">
-          <p>Знайди свого</p>
-          <p>найкращого друга</p>
-        </div>
-      </div>
-
-      <div>
-        <h1 class="font-bold leading-relaxed">Навігація</h1>
-        <ul class="mt-8">
-          <li><a href="">Знайти улюбленця</a></li>
-          <li><a href="">Притулки</a></li>
-          <li><a href="">Pet Stories</a></li>
-          <li><a href="">Блог</a></li>
-          <li><a href="">Новини</a></li>
-          <li><a href="">Розіграші</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <h1 class="font-bold leading-relaxed">Інструменти</h1>
-        <ul class="mt-8">
-          <li><a href="">FAQ</a></li>
-          <li><a href="">Волонтерство</a></li>
-          <li><a href="">Запит на улюбленця</a></li>
-          <li><a href="">Мій кабінет</a></li>
-          <li><a href="">Статистика оголошень</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <h1 class="font-bold leading-relaxed">Дізнавайтесь усі новини першими</h1>
-        <form action="" class="mt-8 flex gap-8">
-          <input
-            class="w-[300px] rounded-3xl border-[3px] border-brown-light bg-[#FFDDEE] bg-opacity-[25%] px-5 py-2 text-white placeholder:text-white focus:outline-none"
-            type="text"
-            placeholder="Введіть Ваш email"
-          />
-          <button
-            class="rounded-3xl border-[3px] border-brown-light bg-[#4A2C2A] px-[40px] py-2 transition duration-300 ease-in-out hover:bg-[#FFDDEE] hover:bg-opacity-[25%]"
-          >
-            Підписатись
-          </button>
-        </form>
-      </div>
+<footer
+class="relative z-10 mt-[100px] w-full rounded-t-3xl bg-[#4A2C2A] px-[40px] py-16 lg:px-[70px]"
+>
+<div class="flex w-full flex-wrap items-start justify-between gap-4 text-white md:w-auto">
+  <div class="flex w-full flex-col items-center md:w-auto">
+    <figure>
+      <img class="w-[190px]" src="logo_white.svg" alt="" />
+    </figure>
+    <div class="mt-8 font-normal leading-relaxed text-white">
+      <p class="w-200px md:w-[180px]">Знайди свого найкращого друга</p>
     </div>
-  </footer>
+  </div>
+
+  <div class="mt-8 flex w-full justify-center gap-8 md:mt-0 md:w-auto">
+    <div>
+      <h1 class="font-bold leading-relaxed">Навігація</h1>
+      <ul class="mt-4 flex flex-col gap-4 md:gap-2 lg:mt-8">
+        <li><a href="">Знайти улюбленця</a></li>
+        <li><a href="shelters">Притулки</a></li>
+        <li><a href="">Pet Stories</a></li>
+        <li><a href="">Блог</a></li>
+        <li><a href="">Новини</a></li>
+        <li><a href="">Розіграші</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h1 class="font-bold leading-relaxed">Інструменти</h1>
+      <ul class="mt-4 flex flex-col gap-4 md:gap-2 lg:mt-8">
+        <li><a href="">FAQ</a></li>
+        <li><a href="">Волонтерство</a></li>
+        <li><a href="">Запит на улюбленця</a></li>
+        <li><a href="profile">Мій кабінет</a></li>
+        <li><a href="">Статистика оголошень</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="mt-8 flex w-full flex-col md:mt-0 md:w-auto">
+    <h1 class="text-center font-bold leading-relaxed md:text-left">
+      Дізнавайтесь усі новини першими
+    </h1>
+    <form action="" class="mt-8 flex flex-col gap-8 md:flex-row">
+      <input
+        class="w-full rounded-3xl border-[3px] border-[#F6EBEA] bg-[#FADADD] bg-opacity-[25%] px-5 py-2 text-white placeholder:text-white focus:outline-none md:w-[300px]"
+        type="text"
+        placeholder="Введіть Ваш email"
+      />
+      <button
+        class="w-full rounded-3xl border-[3px] border-[#F6EBEA] bg-[#4A2C2A] px-[40px] py-2 transition duration-300 ease-in-out hover:bg-[#FADADD] hover:bg-opacity-[25%] md:w-auto"
+      >
+        Підписатись
+      </button>
+    </form>
+  </div>
+</div>
+</footer>

@@ -45,9 +45,28 @@
         </div>
 
 
+      <div class="relative z-20 hidden items-center gap-6 lg:flex">
+        <a href="profile" class="flex items-center gap-2 text-[#4A2C2A]">
+          <img class="h-8 w-8" src="icons/user.png" alt="" />
+          <span>Мій Профіль</span>
+          <img class="h-4 w-4" src="icons/down.png" alt="" />
+        </a>
+        <a
+          href="add-animal"
+          class="rounded-full bg-[#4A2C2A] px-5 py-4 text-[#FFF9F7] transition duration-300 ease-in-out hover:bg-[#3D2523]"
+        >
+          Створити оголошення
+        </a>
       </div>
+
+      <button id="open-btn" class="relative z-20 mr-5 block lg:hidden">
+        <figure>
+          <img class="h-10 w-10" (click)="openMenu.emit()" #openBtn src="icons/burger.png" alt="" />
+        </figure>
+      </button>
     </div>
-    <figure class="absolute right-0 top-0 h-auto w-[200px]">
-      <img src="bg/trace/trace-1.png" alt="" />
-    </figure>
+  </div>
+  <figure class="absolute right-0 top-0 h-auto w-[200px]">
+    <img src="bg/trace/trace-1.png" alt="" />
+  </figure>
 </header>

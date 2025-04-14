@@ -7,29 +7,29 @@ import { ActivatedRoute } from '@angular/router';
   styleUrl: './shelter-page.component.scss'
 })
 export class ShelterPageComponent {
-  shelter: any = {} as any;
+  // shelter: any = {} as any;
 
-  constructor(
-    private route: ActivatedRoute,) {
+  // constructor(
+  //   private route: ActivatedRoute,) {
 
-    }
+  //   }
 
-    getCategoryName(categoryId: number): string {
-      // Implement your category mapping logic here
-      const categories = {
-        1: 'Міський притулок',
-        2: 'Приватний притулок',
-        3: 'Державний притулок'
-      };
-      return categories[categoryId] || 'Інша категорія';
-    }
+  //   getCategoryName(categoryId: number): string {
+  //     // Implement your category mapping logic here
+  //     const categories = {
+  //       1: 'Міський притулок',
+  //       2: 'Приватний притулок',
+  //       3: 'Державний притулок'
+  //     };
+  //     return categories[categoryId] || 'Інша категорія';
+  //   }
 
-  ngOnInit(): void {
-    this.route.data.subscribe({
-      next: data => {
-        this.shelter = data['member']
-        console.log(this.shelter)
-      }
-    });
-  }
+  // ngOnInit(): void {
+  //   this.route.data.subscribe({
+  //     next: data => {
+  //       this.shelter = data['member']
+  //       console.log(this.shelter)
+  //     }
+  //   });
+  // }
 }

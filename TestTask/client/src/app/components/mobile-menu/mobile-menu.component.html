@@ -1,0 +1,34 @@
+<div
+      id="menu" #menu
+      class="fixed bottom-0 left-0 right-0 top-0 z-30 hidden h-screen w-full flex-col items-center bg-[#FFF9F7] px-6 translate-x-full opacity-0 pointer-events-none transition-all duration-700 ease-in-out"
+    >
+      <button id="close-btn" #closeBtn class="absolute right-6 top-6 cursor-pointer">
+        <figure>
+          <img class="h-8 w-8" src="icons/close.png" alt="Закрити меню" />
+        </figure>
+      </button>
+      <nav class="w-full max-w-[400px] text-[#4A2C2A]">
+        <ul class="flex h-screen flex-col items-center justify-center gap-8">
+          <li><a href="home" class="text-xl">Головна</a></li>
+          <li><a href="#" class="text-xl">Знайти улюбленця</a></li>
+          <li><a href="shelters" class="text-xl">Притулки</a></li>
+          <li><a href="#" class="text-xl">Pet Stories</a></li>
+          <li><a href="login" class="text-xl">Увійти</a></li>
+          <!-- <li>
+            <a href="#" class="flex items-center gap-2 text-xl">
+              <img class="h-8 w-8" src="icons/user.png" alt="" />
+              <span>Мій Профіль</span>
+              <img class="h-4 w-4" src="icons/down.png" alt="" />
+            </a>
+          </li> -->
+          <li class="mt-8 flex justify-center">
+            <a
+              href="add-animal"
+              class="absolute bottom-[32px] inline-block rounded-full bg-[#4A2C2A] px-5 py-4 text-[#FFF9F7] transition duration-300 ease-in-out hover:bg-[#3D2523]"
+            >
+              Створити оголошення
+            </a>
+          </li>
+        </ul>
+      </nav>
+</div>

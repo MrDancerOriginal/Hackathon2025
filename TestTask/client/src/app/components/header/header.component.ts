@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef, EventEmitter, Output } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { AuthService } from '../../services/auth.service';
 
@@ -9,9 +9,8 @@ import { AuthService } from '../../services/auth.service';
 })
 
 export class HeaderComponent {
-  /**
-   *
-   */
+  @ViewChild('openBtn') openBtn!: ElementRef;
+  @Output() openMenu = new EventEmitter<void>(); 
   constructor(private authService: AuthService) {
     console.log(this.isLoggedIn());
   }
